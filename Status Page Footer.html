@@ -1,0 +1,166 @@
+<script>
+
+// Fixes for page maximizing components on refresh
+//------------------------------------------------
+	// Auto Open Fix for Blue
+$(function() {
+	$(document).ready(function() {
+		$('.component-inner-container.status-blue.showcased').click()
+	});
+});
+
+	// Auto Open Fix for Yellow
+$(function() {
+	$(document).ready(function() {
+		$('.component-inner-container.status-yellow.showcased').click()
+	});
+});
+
+	//Auto Open Fix for Orange
+$(function() {
+	$(document).ready(function() {
+		$('.component-inner-container.status-orange.showcased').click()
+	});
+});
+
+	//Auto Open Fix for Red
+$(function() {
+	$(document).ready(function() {
+		$('.component-inner-container.status-red.showcased').click()
+	});
+});
+
+// Text changes throughout the page
+//---------------------------------
+	//Replace "Had a major outage" with "Had and outage"
+$(function() {
+	$(document).ready(function() {
+		var str = document.getElementById("major-outage-group-count").innerHTML;
+		var res = str.replace(" had a major outage", " had an outage");
+		document.getElementById("major-outage-group-count").innerHTML = res;
+	});
+});
+
+	//Replace "Major outage" with "Outage"
+$('.component-status').each(function() {
+	var text = $(this).text();
+	$(this).text(text.replace('Major Outage', 'Outage'));
+});
+
+	//Replace "Partial Outage" with "Informational"
+$('.component-status').each(function() {
+	var text = $(this).text();
+	$(this).text(text.replace('Partial Outage', 'Informational'));
+});
+
+	//Replace "Degraded Performance" with "Event"
+$('.component-status').each(function() {
+	var text = $(this).text();
+	$(this).text(text.replace('Degraded Performance', 'Event'));
+});
+
+// Go to the top button functionality
+//-----------------------------------
+	//Fade arrow up button after scrolling down some
+$(window).scroll(function() {
+	var height = $(window).scrollTop();
+	if (height > 650) {
+		$('#topBtn').fadeIn();
+	} else {
+		$('#topBtn').fadeOut();
+	}
+});
+
+	//Scroll to top when arrow up clicked
+function topFunction() {
+	document.querySelector('#custom-header').scrollIntoView({
+		behavior: 'smooth'
+	});
+};
+
+// Unused components removal
+//--------------------------
+	//Remove 90 day uptime link
+	$('.components-uptime-link').remove();
+
+// Layout for components/page
+//---------------------------
+	// Row Div creation - CUSTOM
+$row = $('<div class="row"></div>');
+$row.prependTo('.layout-content > .container');
+
+	//Adjust layout based on size of the window without blocking the ability to copy text
+function applyLayout(x) {
+  if (x.matches) { // If media query matches
+		$('.components-section').removeClass('span4').prependTo($row);
+		$('.unresolved-incidents').removeClass('span8').prependTo($row);
+		$('.page-status.status-none').removeClass('span8').prependTo($row);
+		$('#portalBtn').removeClass('span8').prependTo($row);
+  } else {
+		// Set variables
+		var Informational = $('#Informational');
+		var Informational_Container = $('#Informational_Container');
+		var Open_Incidents = $('#Open_Incidents');
+		var Open_Incidents_Container = $('#Open_Incidents_Container');
+
+		// Place titles above containers
+		Informational.prependTo($(Informational_Container));
+		Open_Incidents.prependTo($(Open_Incidents_Container));
+
+		// Place incidents into containers
+		Open_Incidents_Container.appendTo($('.unresolved-incidents'));
+		Informational_Container.appendTo($('.unresolved-incidents'));
+
+		// Place incidents into containers
+		$('.unresolved-incident.impact-major').appendTo($(Informational_Container));
+		$('.unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-maintenance, .unresolved-incident.impact-critical').appendTo($(Open_Incidents_Container));
+
+		// Place scheduled maintenance container above past incidents
+		$('.scheduled-maintenances-container').prependTo($('#past-incidents'));
+
+		// Format page layout
+		$('.components-section').addClass('span4').appendTo($row);
+		$('.unresolved-incidents').addClass('span8').appendTo($row);
+		$('.page-status.status-none').addClass('span8').appendTo($row);
+		$('#past-incidents').addClass('span4').appendTo($('.components-section'));
+		$('.incidents-list.format-expanded').addClass('span4').appendTo($('.components-section'));
+  }
+};
+
+var x = window.matchMedia("(max-width: 822px)")
+applyLayout(x) // Call listener function at run time
+x.addListener(applyLayout) // Attach listener function on state changes
+
+// Performance Fixes
+//---------------------------
+	// Remove subscribe button from open incidents to stop Status Page from crashing computer.
+$(function() {
+	$('.modal-open-incident-subscribe').remove();
+	$('.subscribe').remove();
+});
+
+// Other Changes
+//---------------------------
+	//Limit History
+  	//Replace "x" with the number of days you want to show + 2
+$(function() {
+	$('.status-day:nth-child(n+4)').remove();
+});
+
+	// Hide cover once page is fully loaded
+$(window).on('load', function() {
+   $("#cover").hide();
+	 $(".loader").hide();
+});
+
+	// Show informational title if informational incidents are present
+if($('.unresolved-incident.impact-major').length){
+  $('#Informational_Container').show();
+}
+
+	// Show open incidents title if incidents are present
+if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-critical').length){
+  $('#Open_Incidents_Container').show();
+}
+
+</script>

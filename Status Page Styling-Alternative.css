@@ -1,0 +1,235 @@
+/* Color of background in body */
+body {background: #f4f6f9;}
+
+/* Custom Header */
+#custom-header {background-color:#fff; padding:24px 40px 23px; position:relative; border-bottom:1px solid #e0e0e0;}
+#custom-header .logo-container {float:left; max-width:325px;}
+#custom-header .updates-dropdown {right: 0px;}
+#custom-header {padding: 10px 40px 10px;}
+
+@media screen and (min-width: 900px) {
+  #custom-header .logo-container {position:relative; top:0px;}
+  #custom-header .show-updates-dropdown {padding:9px 18px 8px; -moz-border-radius:4px; -webkit-border-radius:4px; -ms-border-radius:4px; border-radius:4px; border:2px solid rgba(175,175,175,.5); position:relative; top:10px;}
+  #custom-header .show-updates-dropdown:hover {border-color:rgba(175,175,175,.8);}
+}
+
+@media screen and (max-width: 900px) {
+  #custom-header {text-align:center; padding-left:5%; padding-right:5%; padding-bottom:18px;}
+  #custom-header .logo-container {float:none; display:block; margin-bottom:18px; max-width:none;}
+  #custom-header .logo-container .logo {max-width:325px; display:inline-block;}
+}
+
+@media screen and (max-width: 475px) {
+  #custom-header .logo-container .logo {max-width:70%;}
+}
+
+/* Reduce space below header */
+.layout-content.status .custom-header-container {margin-bottom: 15px;}
+
+/* Button to go to the top customization */
+#topBtn {border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -o-border-radius: 50px;
+  -ms-border-radius: 50px;
+  display: inline-block;
+  font-size: 2rem;
+  height: 35px;
+  line-height: 35px;
+  width: 35px;
+  color: #747474;
+  border: 2px solid #747474;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  right: 5px;
+  background: transparent;
+  outline: none;
+  display: none;
+}
+
+/* Button to go to the top customization when hovered over */
+#topBtn:hover {
+  background-color: #333;
+  color: #ffffff;
+  background: #333;
+  border: 2px solid #333;
+}
+
+/* Button for portal customization */
+#portalBtn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  top: 17.5px;
+  right: 15px;
+  color: black;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+/*Button for portal customization when hovered over */
+#portalBtn:hover {
+  background-color: #0442BB;
+  color: #ffffff;
+}
+
+/* Button for portal remove blue border once button is clicked */
+#portalBtn:focus {
+  outline:0;
+}
+
+.layout-content.status.status-index .page-status.status-none {margin: 0;}
+
+/* Expand content to edges of the page */
+.container {
+  margin-left: 35px;
+  margin-right: 35px;
+  max-width: 95%;
+  min-width: 95%;
+}
+
+/* Left column width */
+.row>.span4 {width: 45%;}
+
+/* Right column width */
+.row>.span8 {width: 45%;}
+
+/* Spacing under components to match "Open Incidents" & "Informational" */
+.layout-content.status.status-index .components-section .components-container {margin-bottom: 26px;}
+
+/* Bold Component title names */
+.layout-content.status.status-index .components-section .component-container.is-group>.component-inner-container .name {font-weight: bold; font-size: 18px;}
+
+/* Bold text for component-status */
+.component-status {font-weight: bold;}
+
+/* Increase text size for component-status */
+.layout-content.status.status-index .components-section .component-container .component-status {font-size: 105%;}
+
+/* Spacing for past incidents (not title) */
+.layout-content.status .incidents-list {margin-left: 10px; margin-top: -25px;}
+
+/* Spacing for maintenance (not title)*/
+.scheduled-maintenance {margin-left: 10px;}
+
+/* Spacing for maintenance container spacing */
+.layout-content.status.status-index .scheduled-maintenances-container {margin-top: 27px; margin-bottom: 40px;}
+
+/* Unresolved Incidents Spacing (adjusted by window size) */
+@media screen and (min-width: 823) {.layout-content.status.status-index .unresolved-incidents{margin-bottom: 25px; margin-top: 25px; margin-left: 45px;}}
+
+/* Custom Style for "Open Incidents" title */
+#Open_Incidents {text-decoration: none; font-size:1.75rem; font-weight: 500; line-height: 60px;}
+
+/* Add pointer for "Open Incidents" title */
+#Open_Incidents:hover {cursor:pointer;}
+
+/* Custom Style for "Open_Incidents_Container" container */
+#Open_Incidents_Container {display:none;}
+
+/* Custom Style for "Informational" title */
+#Informational {font-size:1.75rem; font-weight: 500; line-height: 60px; padding-top: 15px; padding-bottom: -20px;}
+
+/* Add pointer for "Informational" title */
+#Informational:hover {cursor:pointer;}
+
+/* Custom Style for "Informational_Container" container */
+#Informational_Container {display:none;}
+
+/* Hides the components legend */
+.layout-content.status.status-index .components-section .component-statuses-legend {display:none;}
+
+/* Hide the Subscribe to Updates button at the top of the page */
+.layout-content.status .custom-header-container .updates-dropdown-container {display: none !important;}
+
+/* All Status Operational Bar Spacing */
+.layout-content.status.status-index .page-status.status-none {margin-left: 25px; margin-top: 25px;}
+
+/* Hides Tooltips */
+.tooltipster-base {display: none;}
+
+/* Hide Partial Outages */
+#partial-outage-group-count {display: none !important;}
+.outage-field.partial {display: none !important;}
+
+/* Major Outage to Outage */
+#uptime-tooltip .outage-field .label {font-size: 0 !important;}
+#uptime-tooltip .tooltip-box .outage-field:before {content:"OUTAGE";}
+
+/* Cover formatting */
+#cover {position: fixed; height: 100%; width: 100%; top: 0; left: 0; background: #f4f6f9; z-index:9998;}
+
+/* Loader formatting */
+.loader {position: fixed; top: 50%;left: 50%;z-index:9999;border: 10px solid #f4f6f9; border-top: 10px solid #333; border-radius: 50%;width: 90px;height: 90px;animation: spin 0.6s linear infinite;}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Changes Name Space for Components */
+.layout-content.status.status-index .components-section .component-container .name {font-size: 0.9rem; max-width: 85%;}
+
+/* MOBILE FORMATTING */
+@media screen and (max-width: 700px) {
+  .component-status.tool.tooltipstered {display: none;}
+  .row {max-width: 99%}
+}
+
+/* Limit History
+   Replace "x" with the number of days you want to show + 2 */
+.status-day:nth-child(n+4) {display:none;}
+
+/* Unresolved Incidents Maintenance Title Color */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-none .incident-title {  background-color: #333;}
+/* Past Incidents Maintenance Title Color */
+.layout-content.status.status-index .incidents-list .incident-title.impact-none a { color: #333;}
+/* Scheduled Maintenance Title Color */
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a { color: #333;}
+/* Maintenance History Title Color */
+.layout-content.status-full-history .month .incident-container .impact-none { color: #333;}
+/* Maintenance History Border Color */
+.layout-content.status.status-index .unresolved-incident.impact-none .updates { border-color: #333;}
+
+/* Unresolved Incidents Maintenance Title Color */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-maintenance .incident-title {  background-color: #333;}
+/* Past Incidents Maintenance Title Color */
+.layout-content.status.status-index .incidents-list .incident-title.impact-maintenance a { color: #333;}
+/* Maintenance History Title Color */
+.layout-content.status-full-history .month .incident-container .impact-maintenance { color: #333;}
+/* Maintenance History Border Color */
+.layout-content.status.status-index .unresolved-incident.impact-maintenance .updates { border-color: #333;}
+
+/* Unresolved Incidents Outage Title Color */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-critical .incident-title {  background-color: #333;}
+/* Past Incidents Outage Title Color */
+.layout-content.status.status-index .incidents-list .incident-title.impact-critical a { color: #333;}
+/* Outage History Title Color */
+.layout-content.status-full-history .month .incident-container .impact-critical { color: #333;}
+/* Maintenance History Border Color */
+.layout-content.status.status-index .unresolved-incident.impact-critical .updates { border-color: #333;}
+
+/* Unresolved Incidents Informational Title Color */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-major .incident-title {  background-color: #333;}
+/* Past Incidents Informational Title Color */
+.layout-content.status.status-index .incidents-list .incident-title.impact-major a { color: #333;}
+/* Informational History Title Color */
+.layout-content.status-full-history .month .incident-container .impact-major { color: #333;}
+/* Maintenance History Border Color */
+.layout-content.status.status-index .unresolved-incident.impact-major .updates { border-color: #333;}
+
+/* Unresolved Incidents Event Title Color */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-minor .incident-title {  background-color: #333;}
+/* Past Incidents Event Title Color */
+.layout-content.status.status-index .incidents-list .incident-title.impact-minor a { color: #333;}
+/* Event History Title Color */
+.layout-content.status-full-history .month .incident-container .impact-minor { color: #333;}
+/* Maintenance History Border Color */
+.layout-content.status.status-index .unresolved-incident.impact-minor .updates { border-color: #333;}
