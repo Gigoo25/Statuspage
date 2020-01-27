@@ -58,7 +58,12 @@ body {background: #f4f6f9;}
   border: 2px solid #333;
 }
 
-/* Button for portal customization */
+/* Button to go to the top remove blue border once button is clicked */
+#topBtn:focus {
+  outline:0;
+}
+
+/* Button for support portal customization */
 #portalBtn {
   border: none;
   background-color: inherit;
@@ -75,13 +80,13 @@ body {background: #f4f6f9;}
   display: none;
 }
 
-/*Button for portal customization when hovered over */
+/* Button for support portal customization when hovered over */
 #portalBtn:hover {
   background-color: #0442BB;
   color: #ffffff;
 }
 
-/* Button for portal remove blue border once button is clicked */
+/* Button for support portal remove blue border once button is clicked */
 #portalBtn:focus {
   outline:0;
 }
