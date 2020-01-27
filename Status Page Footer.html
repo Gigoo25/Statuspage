@@ -78,6 +78,16 @@ function topFunction() {
 	});
 };
 
+	//Hide support button after shrinking the window and fade in when increasing the window size
+$(window).resize(function() {
+		var wi = $(window).width();
+		if (wi >= 823) {
+		$('#portalBtn').fadeIn();
+	} else {
+		$('#portalBtn').hide();
+	}
+});
+
 // Unused components removal
 //--------------------------
 	//Remove 90 day uptime link
