@@ -79,13 +79,11 @@
 			});
 		};
 
-			//Hide support button after shrinking the window and fade in when increasing the window size
+			//Move support button after shrinking/increasing the window width
 		$(window).resize(function() {
 				var wi = $(window).width();
-				if (wi >= 823) {
-				$('#portalBtn').fadeIn();
-			} else {
-				$('#portalBtn').hide();
+				if (wi < 822) {
+					$('#portalBtn').appendTo('#custom-header');
 			}
 		});
 
