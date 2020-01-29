@@ -131,9 +131,6 @@ body {background: #f4f6f9;}
 /* Unresolved Incidents Spacing (adjusted by window size) */
 @media screen and (min-width: 823) {.layout-content.status.status-index .unresolved-incidents{margin-bottom: 25px; margin-top: 25px; margin-left: 45px;}}
 
-/* Custom Style for "Open Incidents" title */
-#Open_Incidents {text-decoration: none; font-size:1.75rem; font-weight: 500; line-height: 60px;}
-
 /* Add pointer for "Open Incidents" title */
 #Open_Incidents:hover {cursor:pointer;}
 
@@ -141,7 +138,7 @@ body {background: #f4f6f9;}
 #Open_Incidents_Container {display:none;}
 
 /* Custom Style for "Informational" title */
-#Informational {font-size:1.75rem; font-weight: 500; line-height: 60px; padding-top: 15px; padding-bottom: -20px;}
+#Informational {padding-top: 15px; padding-bottom: -20px;}
 
 /* Add pointer for "Informational" title */
 #Informational:hover {cursor:pointer;}
