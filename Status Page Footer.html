@@ -201,11 +201,20 @@
 			// Show informational title if informational incidents are present
 		if($('.unresolved-incident.impact-major').length){
 		  $('#Informational_Container').show();
-		}
+		};
 
 			// Show open incidents title if incidents are present
 		if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-critical').length){
 		  $('#Open_Incidents_Container').show();
+		};
+
+		unresolved-incidents
+		unresolved-incident impact-critical
+		unresolved-incident impact-major
+		var teststring = "Outage";
+		if ($(".layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title a").text().indexOf(teststring) > -1)
+		{
+		    alert("Match!");
 		}
 
 	</script>
