@@ -218,6 +218,8 @@ body {background: #f4f6f9;}
 .layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a {color: #3498DB;}
 /* Maintenance History Title Color */
 .layout-content.status-full-history .month .incident-container .impact-none {color: #3498DB;}
+/* Incidents Updates Maintenance Border Color */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-none .updates {border-top-color: rgb(26, 98, 147);border-right-color: rgb(26, 98, 147);border-bottom-color: rgb(26, 98, 147);border-left-color: rgb(26, 98, 147);}
 
 /* Unresolved Incidents Outage Title Color */
 .layout-content.status.status-index .unresolved-incidents .unresolved-incident.impact-critical .incident-title {background-color: #e74c3c;}
