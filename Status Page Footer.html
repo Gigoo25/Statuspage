@@ -142,6 +142,17 @@
 				$('.page-status.status-none').removeClass('span8').prependTo($row);
 				$('#portalBtn').removeClass('span8').prependTo($row);
 		  } else {
+				// Correct color for open incidents
+				$(".unresolved-incident:contains('Outage')").removeClass().addClass( "unresolved-incident impact-critical" );
+				$(".unresolved-incident:contains('Informational')").removeClass().addClass( "unresolved-incident impact-major" );
+				$(".unresolved-incident:contains('Maintenance')").removeClass().addClass( "unresolved-incident impact-none" );
+				$(".unresolved-incident:contains('Event')").removeClass().addClass( "unresolved-incident impact-minor" );
+				// Correct color for past incidents
+				$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
+				$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
+				$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
+				$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
+
 				// Set variables
 				var Informational = $('#Informational');
 				var Informational_Container = $('#Informational_Container');
