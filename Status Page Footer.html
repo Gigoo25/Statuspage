@@ -142,16 +142,8 @@
 				$('.page-status.status-none').removeClass('span8').prependTo($row);
 				$('#portalBtn').removeClass('span8').prependTo($row);
 		  } else {
-				// Correct color for open incidents
-				$(".unresolved-incident:contains('Outage')").removeClass().addClass( "unresolved-incident impact-critical" );
-				$(".unresolved-incident:contains('Informational')").removeClass().addClass( "unresolved-incident impact-major" );
-				$(".unresolved-incident:contains('Maintenance')").removeClass().addClass( "unresolved-incident impact-none" );
-				$(".unresolved-incident:contains('Event')").removeClass().addClass( "unresolved-incident impact-minor" );
-				// Correct color for past incidents
-				$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
-				$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
-				$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
-				$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
+				// Correct color coding based on title
+				ColorCorrect ();
 
 				// Set variables
 				var Informational = $('#Informational');
@@ -219,19 +211,52 @@
 		  $('#Open_Incidents_Container').show();
 		};
 
-			// Correct color coding based on title
-		$(document).ready(function () {
-				// Correct color for open incidents
-    	$(".unresolved-incident:contains('Outage')").removeClass().addClass( "unresolved-incident impact-critical" );
-	    $(".unresolved-incident:contains('Informational')").removeClass().addClass( "unresolved-incident impact-major" );
-	    $(".unresolved-incident:contains('Maintenance')").removeClass().addClass( "unresolved-incident impact-none" );
-	    $(".unresolved-incident:contains('Event')").removeClass().addClass( "unresolved-incident impact-minor" );
-				// Correct color for past incidents
-    	$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
-	    $(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
-	    $(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
-	    $(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
+			// Assign id to history expand incident buttons
+		$(document).ready(function(){
+			$('.expand-incidents').attr('id', 'button1');
 		});
+
+			// Call function when history expand incident buttons are clicked
+		$(document).on('click', '#button1', function(event) {
+			setTimeout(ColorCorrect, 2000)
+		});
+
+			// Load color correct coding for incidents
+		$(document).ready(function(){
+			ColorCorrect ();
+		});
+
+			// Correct color coding based on title
+		function ColorCorrect () {
+				// Correct color for open incidents
+			$(".unresolved-incident:contains('Outage')").removeClass().addClass( "unresolved-incident impact-critical" );
+			$(".unresolved-incident:contains('Informational')").removeClass().addClass( "unresolved-incident impact-major" );
+			$(".unresolved-incident:contains('Maintenance')").removeClass().addClass( "unresolved-incident impact-none" );
+			$(".unresolved-incident:contains('Event')").removeClass().addClass( "unresolved-incident impact-minor" );
+				// Correct color for past incidents
+			$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
+			$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
+			$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
+			$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
+		};
+
+			// Hide containter titles in the history page
+		$( window ).on( "load", function() {
+			if(location.pathname=="/history") {
+				$('#Open_Incidents').hide();
+				$('#Informational').hide();
+			};
+		});
+
+		// Log when document ready is complete
+	$( document ).ready(function() {
+			console.log( "document loaded" );
+	});
+
+		// Log when window load is complete
+	$( window ).on( "load", function() {
+			console.log( "window loaded" );
+	});
 
 	</script>
 </html>
