@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<script>
-		// Fixes for page maximizing components on refresh
-		//------------------------------------------------
-		$(function() {
-			$(document).ready(function() {
-				// Auto Open Fix for Blue
-				$('.component-inner-container.status-blue.showcased').click()
-				// Auto Open Fix for Yellow
-				$('.component-inner-container.status-yellow.showcased').click()
-				//Auto Open Fix for Orange
-				$('.component-inner-container.status-orange.showcased').click()
-				//Auto Open Fix for Red
-				$('.component-inner-container.status-red.showcased').click()
-			});
-		});
-
 		// Text changes throughout the page
 		//---------------------------------
 			//Replace "Had a major outage" with "Had and outage" in Component Status
@@ -87,6 +72,9 @@
 			// Correct color coding based on title
 			ColorCorrect ();
 
+			// Close components that are open
+			ComponentClose ();
+
 			// Place titles above containers
 			Informational.prependTo($(Informational_Container));
 			Open_Incidents.prependTo($(Open_Incidents_Container));
@@ -120,17 +108,25 @@
 				$('#Open_Incidents_Container').show();
 			};
 
+				// Remove subscribe button from open incidents to stop Status Page from overheating the computer
+			$('.modal-open-incident-subscribe').remove();
+			$('.subscribe').remove();
+
 			if (x.matches) { // If media query matches
 				// Format page layout
 				$('.components-section').removeClass('span4').prependTo($row);
 				$('.unresolved-incidents').removeClass('span8').prependTo($row);
 				$('.page-status.status-none').removeClass('span8').prependTo($row);
 				$('#portalBtn').removeClass('span8').prependTo($row);
+				// Hide cover once page is fully loaded
+				HideCover ();
 		  } else {
 				// Format page layout
 				$('.components-section').addClass('span4').appendTo($row);
 				$('.unresolved-incidents').addClass('span8').appendTo($row);
 				$('.page-status.status-none').addClass('span8').appendTo($row);
+				// Hide cover once page is fully loaded
+				HideCover ();
 		  }
 		};
 
@@ -148,26 +144,12 @@
 			};
 		});
 
-		// Performance Fixes
-		//---------------------------
-			// Remove subscribe button from open incidents to stop Status Page from crashing computer.
-		$(document).ready(function(){
-			$('.modal-open-incident-subscribe').remove();
-			$('.subscribe').remove();
-		});
-
 		// Other Changes
 		//---------------------------
 			//Limit History
 		  	//Replace "x" with the number of days you want to show + 2
 		$(function() {
 			$('.status-day:nth-child(n+4)').remove();
-		});
-
-			// Hide cover once page is fully loaded
-		$( window ).on( "load", function() {
-		   $("#cover").hide();
-			 $(".spinner").hide();
 		});
 
 			// Assign id to history expand incident buttons
@@ -179,6 +161,24 @@
 		$(document).on('click', '#button1', function(event) {
 			setTimeout(ColorCorrect, 2000)
 		});
+
+			// Log when document ready is complete
+		$( document ).ready(function() {
+			console.log( "document loaded" );
+		});
+
+			// Log when window load is complete
+		$( window ).on( "load", function() {
+			console.log( "window loaded" );
+		});
+
+		// Functions
+		//---------------------------
+			// Hide cover once page is fully loaded
+		function HideCover () {
+			 $("#cover").hide();
+			 $(".spinner").hide();
+		};
 
 			// Correct color coding based on title
 		function ColorCorrect () {
@@ -194,15 +194,12 @@
 			$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
 		};
 
-			// Log when document ready is complete
-		$( document ).ready(function() {
-				console.log( "document loaded" );
-		});
-
-			// Log when window load is complete
-		$( window ).on( "load", function() {
-				console.log( "window loaded" );
-		});
+			// Close components that are open & change the minus square to a plus
+		function ComponentClose () {
+			$(".component-container, .border-color, .is-group").toggleClass("open",false);
+			$(".fa group-parent-indicator, .color-secondary, .font-small").toggleClass("fa-plus-square-o",true);
+			$(".fa group-parent-indicator, .color-secondary, .font-small").toggleClass("fa-minus-square-o",false);
+		};
 
 	</script>
 </html>
