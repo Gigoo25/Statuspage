@@ -108,9 +108,9 @@
 				$('#Open_Incidents_Container').show();
 			};
 
-				// Remove subscribe button from open incidents to stop Status Page from overheating the computer
-			$('.modal-open-incident-subscribe').remove();
-			$('.subscribe').remove();
+				// Remove subscribe button from incidents
+			$('.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .subscribe').remove();
+			$('.flat-button, .subscribe-button').remove();
 
 			if (x.matches) { // If media query matches
 				// Format page layout
@@ -134,13 +134,10 @@
 		applyLayout(x) // Call listener function at run time
 		x.addListener(applyLayout) // Attach listener function on state changes
 
-			// Hide custom containter/titles in the "pages" page
+			// Correct title color in the "incidents" page
 		$( window ).on( "load", function() {
-			if(location.pathname=="/pages/") {
-				$('#Open_Incidents').hide();
-				$('#Open_Incidents_Container').hide();
-				$('#Informational').hide();
-				$('#Informational_Container').hide();
+			if(location.pathname=="/incidents/") {
+				ColorCorrect ();
 			};
 		});
 
@@ -159,17 +156,7 @@
 
 			// Call function when history expand incident buttons are clicked
 		$(document).on('click', '#button1', function(event) {
-			setTimeout(ColorCorrect, 2000)
-		});
-
-			// Log when document ready is complete
-		$( document ).ready(function() {
-			console.log( "document loaded" );
-		});
-
-			// Log when window load is complete
-		$( window ).on( "load", function() {
-			console.log( "window loaded" );
+			setTimeout(ColorCorrect, 200)
 		});
 
 		// Functions
@@ -192,6 +179,11 @@
 			$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
 			$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
 			$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
+				// Correct color for single incidents
+			$(".incident-name:contains('Outage')").removeClass().addClass( "color-primary incident-name impact-critical" );
+			$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
+			$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
+			$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
 		};
 
 			// Close components that are open & change the minus square to a plus
