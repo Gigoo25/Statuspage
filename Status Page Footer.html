@@ -108,7 +108,7 @@
 				$('#Open_Incidents').show();
 				$('#Open_Incidents_Container').show();
 					// Sort incidents by severity
-				//SortIncidents ();
+				SortIncidents ();
 			};
 
 				// Remove subscribe button from incidents
@@ -173,10 +173,10 @@
 			// Correct color coding based on title
 		function ColorCorrect () {
 				// Correct color for open incidents
-			$(".unresolved-incident:contains('Outage')").removeClass().addClass( "unresolved-incident impact-critical" );
-			$(".unresolved-incident:contains('Informational')").removeClass().addClass( "unresolved-incident impact-major" );
-			$(".unresolved-incident:contains('Maintenance')").removeClass().addClass( "unresolved-incident impact-none" );
-			$(".unresolved-incident:contains('Event')").removeClass().addClass( "unresolved-incident impact-minor" );
+			$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
+			$(".incident-title:contains('Informational')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-major" );
+			$(".incident-title:contains('Maintenance')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-none" );
+			$(".incident-title:contains('Event')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-minor" );
 				// Correct color for past incidents
 			$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
 			$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
