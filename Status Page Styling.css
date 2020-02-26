@@ -204,6 +204,9 @@ body {background: #f4f6f9;}
 /* Changes Name Space for Components */
 .layout-content.status.status-index .components-section .component-container .name {font-size: 0.9rem; max-width: 85%;}
 
+/* Allow titles to be full length */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .actual-title.with-ellipsis {width: 100%;}
+
 /* MOBILE FORMATTING */
 @media screen and (max-width: 700px) {
   .component-status.tool.tooltipstered {display: none;}
