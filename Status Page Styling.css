@@ -78,7 +78,7 @@ body {background: #f4f6f9;}
     position: absolute;
     top: 17.5px;
     right: 15px;
-    color: black;
+    color: #ffffff;
     font-weight: 500;
     line-height: 15px;
   }
@@ -95,7 +95,7 @@ body {background: #f4f6f9;}
     display: inline-block;
     top: 17.5px;
     right: 15px;
-    color: black;
+    color: #ffffff;
     font-weight: 500;
     line-height: 15px;
   }
@@ -103,8 +103,7 @@ body {background: #f4f6f9;}
 
 /* Button for support portal customization when hovered over */
 #portalBtn:hover {
-  background-color: #033BA8;
-  color: #ffffff;
+  background-color: #022E82;
 }
 
 /* Button for support portal remove blue border once button is clicked */
