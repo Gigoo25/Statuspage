@@ -26,6 +26,11 @@ body {background: #f4f6f9;}
 /* Reduce space below header */
 .layout-content.status .custom-header-container {margin-bottom: 15px;}
 
+/* Apply Anti-Aliasing on images */
+img {
+  -webkit-backface-visibility: hidden;
+}
+
 /* Button to go to the top customization */
 #topBtn {
   border-radius: 50px;
