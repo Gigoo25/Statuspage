@@ -70,7 +70,7 @@ body {background: #f4f6f9;}
 @media screen and (min-width: 822px) {
   #portalBtn {
     border: none;
-    background-color: inherit;
+    background-color: #0442BB;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
@@ -88,7 +88,7 @@ body {background: #f4f6f9;}
 @media screen and (max-width: 822px) {
   #portalBtn {
     border: none;
-    background-color: inherit;
+    background-color: #0442BB;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
@@ -103,7 +103,7 @@ body {background: #f4f6f9;}
 
 /* Button for support portal customization when hovered over */
 #portalBtn:hover {
-  background-color: #0442BB;
+  background-color: #033BA8;
   color: #ffffff;
 }
 
