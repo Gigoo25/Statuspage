@@ -96,16 +96,19 @@
 			// Append "Incident List" to "Components section" to allow past incidents to be on the left side
 			$('.incidents-list.format-expanded').addClass('span4').appendTo($('.components-section'));
 
-			// Show informational title/container if informational incidents are present
+			// Show informational title/container if major incidents are present
 			if($('.unresolved-incident.impact-major').length){
 			  $('#Informational').show();
 			  $('#Informational_Container').show();
 			};
 
-			// Show open incidents title/container if incidents are present
+				// Run functions if none, minor & critical incidents are present
 			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-critical').length){
-			  $('#Open_Incidents').show();
+					// Show open incidents title/container
+				$('#Open_Incidents').show();
 				$('#Open_Incidents_Container').show();
+					// Sort incidents by severity
+				SortIncidents ();
 			};
 
 				// Remove subscribe button from incidents
@@ -170,10 +173,10 @@
 			// Correct color coding based on title
 		function ColorCorrect () {
 				// Correct color for open incidents
-			$(".unresolved-incident:contains('Outage')").removeClass().addClass( "unresolved-incident impact-critical" );
-			$(".unresolved-incident:contains('Informational')").removeClass().addClass( "unresolved-incident impact-major" );
-			$(".unresolved-incident:contains('Maintenance')").removeClass().addClass( "unresolved-incident impact-none" );
-			$(".unresolved-incident:contains('Event')").removeClass().addClass( "unresolved-incident impact-minor" );
+			$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
+			$(".incident-title:contains('Informational')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-major" );
+			$(".incident-title:contains('Maintenance')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-none" );
+			$(".incident-title:contains('Event')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-minor" );
 				// Correct color for past incidents
 			$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
 			$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
@@ -191,6 +194,40 @@
 			$(".component-container, .border-color, .is-group").toggleClass("open",false);
 			$(".group-parent-indicator").toggleClass("fa-plus-square-o",true);
 			$(".group-parent-indicator").toggleClass("fa-minus-square-o",false);
+		};
+
+			// Close components that are open & change the minus square to a plus
+		function SortIncidents () {
+			var $OpenIncidentsList = $('#Open_Incidents_Container');
+
+			// Elements one layer deep get .children(), any deeper go with .find()
+			var $Incidents = $OpenIncidentsList.children('.unresolved-incident');
+
+			/* Bind $incidents to the sort method so we don't have to travel up all these properties more than once.*/
+			var sortList = Array.prototype.sort.bind($Incidents);
+
+			sortList(function ( a, b ) {
+
+			    // Cache inner content from the first element (a) and the next sibling (b)
+			    var aText = a.innerHTML;
+			    var bText = b.innerHTML;
+
+			    // Returning -1 will place element `a` before element `b`
+			    if ( aText < bText ) {
+			        return -1;
+			    }
+
+			    // Returning 1 will do the opposite
+			    if ( aText > bText ) {
+			        return 1;
+			    }
+
+			    // Returning 0 leaves them as-is
+			    return 0;
+			});
+
+			// Put it right back where we got it
+			$OpenIncidentsList.append($Incidents);
 		};
 
 	</script>

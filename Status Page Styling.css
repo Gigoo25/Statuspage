@@ -26,6 +26,11 @@ body {background: #f4f6f9;}
 /* Reduce space below header */
 .layout-content.status .custom-header-container {margin-bottom: 15px;}
 
+/* Apply Anti-Aliasing on images */
+img {
+  -webkit-backface-visibility: hidden;
+}
+
 /* Button to go to the top customization */
 #topBtn {
   border-radius: 50px;
@@ -70,7 +75,7 @@ body {background: #f4f6f9;}
 @media screen and (min-width: 822px) {
   #portalBtn {
     border: none;
-    background-color: inherit;
+    background-color: #0442BB;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
@@ -78,7 +83,7 @@ body {background: #f4f6f9;}
     position: absolute;
     top: 17.5px;
     right: 15px;
-    color: black;
+    color: #ffffff;
     font-weight: 500;
     line-height: 15px;
   }
@@ -88,14 +93,14 @@ body {background: #f4f6f9;}
 @media screen and (max-width: 822px) {
   #portalBtn {
     border: none;
-    background-color: inherit;
+    background-color: #0442BB;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;
     display: inline-block;
     top: 17.5px;
     right: 15px;
-    color: black;
+    color: #ffffff;
     font-weight: 500;
     line-height: 15px;
   }
@@ -103,8 +108,7 @@ body {background: #f4f6f9;}
 
 /* Button for support portal customization when hovered over */
 #portalBtn:hover {
-  background-color: #0442BB;
-  color: #ffffff;
+  background-color: #022E82;
 }
 
 /* Button for support portal remove blue border once button is clicked */
@@ -203,6 +207,9 @@ body {background: #f4f6f9;}
 
 /* Changes Name Space for Components */
 .layout-content.status.status-index .components-section .component-container .name {font-size: 0.9rem; max-width: 85%;}
+
+/* Allow titles to be full length */
+.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .actual-title.with-ellipsis {width: 100%;}
 
 /* MOBILE FORMATTING */
 @media screen and (max-width: 700px) {
