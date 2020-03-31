@@ -75,6 +75,9 @@
 			// Remove unnecessary updates from open incidents
 			UpdateRemoveOpenIncidents ();
 
+			// Remove unnecessary updates from past incidents
+			UpdateRemovePastIncidents ();
+
 			// Close components that are open
 			ComponentClose ();
 
@@ -221,6 +224,11 @@
 			$(".update:contains(' - We are continuing to investigate this issue.')").remove();
 			$(".update:contains(' - We are continuing to monitor for any further issues.')").remove();
 			$(".update:contains(' - We are continuing to work on a fix for this issue.')").remove();
+		};
+
+		function UpdateRemovePastIncidents () {
+				//  Remove accidental "Updates" from past incidents as this causes clutter on the page
+			$('div.update.font-regular:not(.update.font-regular.resolved,.update.font-regular.monitoring,.update.font-regular.identified,.update.font-regular.investigating,.update.font-regular.completed,.update.font-regular.in.progress,.update.font-regular.scheduled)').remove();
 		};
 
 			// Close components that are open & change the minus square to a plus
