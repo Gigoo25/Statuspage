@@ -72,6 +72,9 @@
 			// Correct color coding based on title
 			ColorCorrect ();
 
+			// Remove unnecessary updates from open incidents
+			UpdateRemoveOpenIncidents ();
+
 			// Close components that are open
 			ComponentClose ();
 
@@ -211,6 +214,13 @@
 				$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
 				$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
 			};
+		};
+
+		function UpdateRemoveOpenIncidents () {
+				//  Remove accidental "Updates" from open incidents as this causes clutter on the page
+			$(".update:contains(' - We are continuing to investigate this issue.')").remove();
+			$(".update:contains(' - We are continuing to monitor for any further issues.')").remove();
+			$(".update:contains(' - We are continuing to work on a fix for this issue.')").remove();
 		};
 
 			// Close components that are open & change the minus square to a plus
