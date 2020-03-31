@@ -187,6 +187,30 @@
 			$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
 			$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
 			$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
+				//**Second pass**
+					//Checking if the class does not exist
+					//This is for titles that have multiple matching words like "Informational" & "Event"
+					//This method is temporary until I can think of a more efficient way of writing this
+			if ($('.unresolved-incident').hasClass("impact-critical") !== false) {
+				$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
+				$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
+				$(".incident-name:contains('Outage')").removeClass().addClass( "color-primary incident-name impact-critical" );
+			};
+			if ($('.unresolved-incident').hasClass("impact-major") !== false) {
+				$(".incident-title:contains('Informational')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-major" );
+				$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
+				$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
+			};
+			if ($('.unresolved-incident').hasClass("impact-none") !== false) {
+				$(".incident-title:contains('Maintenance')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-none" );
+				$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
+				$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
+			};
+			if ($('.unresolved-incident').hasClass("impact-minor") !== false) {
+				$(".incident-title:contains('Event')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-minor" );
+				$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
+				$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
+			};
 		};
 
 			// Close components that are open & change the minus square to a plus
