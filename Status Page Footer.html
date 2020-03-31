@@ -228,7 +228,10 @@
 
 		function UpdateRemovePastIncidents () {
 				//  Remove accidental "Updates" from past incidents as this causes clutter on the page
-			$('div.update.font-regular:not(.update.font-regular.resolved,.update.font-regular.monitoring,.update.font-regular.identified,.update.font-regular.investigating,.update.font-regular.completed,.update.font-regular.in.progress,.update.font-regular.scheduled)').remove();
+			$('div.update.font-regular:not(.update.font-regular.resolved,.update.font-regular.monitoring,.update.font-regular.identified,.update.font-regular.investigating,.update.font-regular.completed,.update.font-regular.in.progress,.update.font-regular.scheduled)').addClass("update");
+			$(".update.font-regular.update.update:contains('We are continuing to investigate this issue.')").remove();
+			$(".update.font-regular.update.update:contains('We are continuing to monitor for any further issues.')").remove();
+			$(".update.font-regular.update.update:contains('We are continuing to work on a fix for this issue.')").remove();
 		};
 
 			// Close components that are open & change the minus square to a plus
