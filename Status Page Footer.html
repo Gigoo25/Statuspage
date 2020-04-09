@@ -62,10 +62,14 @@
 		$row.prependTo('.layout-content > .container');
 
 			// Set variables
-		var Informational = $('#Informational');
-		var Informational_Container = $('#Informational_Container');
-		var Open_Incidents = $('#Open_Incidents');
-		var Open_Incidents_Container = $('#Open_Incidents_Container');
+		var Outages = $('#Outages');
+		var Outages_Container = $('#Outages_Container');
+		var Events = $('#Events');
+		var Events_Container = $('#Events_Container');
+		var Maintenances = $('#Maintenances');
+		var Maintenances_Container = $('#Maintenances_Container');
+		var Informationals = $('#Informationals');
+		var Informationals_Container = $('#Informationals_Container');
 
 			// Adjust layout based on size of the window without blocking the ability to copy text
 		function applyLayout(x) {
@@ -82,16 +86,22 @@
 			ComponentClose ();
 
 			// Place titles above containers
-			Informational.prependTo($(Informational_Container));
-			Open_Incidents.prependTo($(Open_Incidents_Container));
+			Outages.prependTo($(Outages_Container));
+			Events.prependTo($(Events_Container));
+			Maintenances.prependTo($(Maintenances_Container));
+			Informationals.prependTo($(Informationals_Container));
 
 			// Place incidents into containers
-			Open_Incidents_Container.appendTo($('.unresolved-incidents'));
-			Informational_Container.appendTo($('.unresolved-incidents'));
+			Outages_Container.appendTo($('.unresolved-incidents'));
+			Events_Container.appendTo($('.unresolved-incidents'));
+			Maintenances_Container.appendTo($('.unresolved-incidents'));
+			Informationals_Container.appendTo($('.unresolved-incidents'));
 
 			// Place incidents into containers
-			$('.unresolved-incident.impact-major').appendTo($(Informational_Container));
-			$('.unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-maintenance, .unresolved-incident.impact-critical').appendTo($(Open_Incidents_Container));
+			$('.unresolved-incident.impact-critical').appendTo($(Outages_Container));
+			$('.unresolved-incident.impact-minor').appendTo($(Events_Container));
+			$('.unresolved-incident.impact-none, .unresolved-incident.impact-maintenance').appendTo($(Maintenances_Container));
+			$('.unresolved-incident.impact-major').appendTo($(Informationals_Container));
 
 			// Place scheduled maintenance container above past incidents
 			$('.scheduled-maintenances-container').prependTo($('#past-incidents'));
@@ -102,19 +112,33 @@
 			// Append "Incident List" to "Components section" to allow past incidents to be on the left side
 			$('.incidents-list.format-expanded').addClass('span4').appendTo($('.components-section'));
 
-			// Show informational title/container if major incidents are present
-			if($('.unresolved-incident.impact-major').length){
-			  $('#Informational').show();
-			  $('#Informational_Container').show();
+				// Show Outages title/container if major incidents are present
+			if($('.unresolved-incident.impact-critical').length){
+					// Show open incidents title/container
+				$('#Outages').show();
+				$('#Outages_Container').show();
 			};
 
-				// Run functions if none, minor & critical incidents are present
-			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-critical').length){
+				// Show Events title/container if major incidents are present
+			if($('.unresolved-incident.impact-minor').length){
 					// Show open incidents title/container
-				$('#Open_Incidents').show();
-				$('#Open_Incidents_Container').show();
-					// Sort incidents by severity
-				SortIncidents ();
+							// **Disabled Title**
+				//$('#Events').show();
+				$('#Events_Container').show();
+			};
+
+				// Show Maintenances title/container if major incidents are present
+			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-none').length){
+					// Show open incidents title/container
+							// **Disabled Title**
+				//$('#Maintenances').show();
+				$('#Maintenances_Container').show();
+			};
+
+				// Show Informationals title/container if major incidents are present
+			if($('.unresolved-incident.impact-major').length){
+			  $('#Informationals').show();
+			  $('#Informationals_Container').show();
 			};
 
 				// Remove subscribe button from incidents
@@ -240,40 +264,6 @@
 			$(".component-container, .border-color, .is-group").toggleClass("open",false);
 			$(".group-parent-indicator").toggleClass("fa-plus-square-o",true);
 			$(".group-parent-indicator").toggleClass("fa-minus-square-o",false);
-		};
-
-			// Close components that are open & change the minus square to a plus
-		function SortIncidents () {
-			var $OpenIncidentsList = $('#Open_Incidents_Container');
-
-			// Elements one layer deep get .children(), any deeper go with .find()
-			var $Incidents = $OpenIncidentsList.children('.unresolved-incident');
-
-			/* Bind $incidents to the sort method so we don't have to travel up all these properties more than once.*/
-			var sortList = Array.prototype.sort.bind($Incidents);
-
-			sortList(function ( a, b ) {
-
-			    // Cache inner content from the first element (a) and the next sibling (b)
-			    var aText = a.innerHTML;
-			    var bText = b.innerHTML;
-
-			    // Returning -1 will place element `a` before element `b`
-			    if ( aText < bText ) {
-			        return -1;
-			    }
-
-			    // Returning 1 will do the opposite
-			    if ( aText > bText ) {
-			        return 1;
-			    }
-
-			    // Returning 0 leaves them as-is
-			    return 0;
-			});
-
-			// Put it right back where we got it
-			$OpenIncidentsList.append($Incidents);
 		};
 
 	</script>

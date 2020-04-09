@@ -156,23 +156,41 @@ img {
 /* Unresolved Incidents Spacing (adjusted by window size) */
 @media screen and (min-width: 822) {.layout-content.status.status-index .unresolved-incidents{margin-bottom: 25px; margin-top: 25px; margin-left: 45px;}}
 
-/* Custom Style for "Open Incidents" title */
-#Open_Incidents {padding-bottom: -20px; display:none;}
+/* Custom Style for "Outages" title */
+#Outages {padding-top: 15px; padding-bottom: -20px; display:none;}
 
-/* Add pointer for "Open Incidents" title */
-#Open_Incidents:hover {cursor:pointer;}
+/* Add pointer for "Outages" title */
+#Outages:hover {cursor:pointer;}
 
-/* Custom Style for "Open_Incidents_Container" container */
-#Open_Incidents_Container {display:none;}
+/* Custom Style for "Outages_Container" container */
+#Outages_Container {display:none;}
 
-/* Custom Style for "Informational" title */
-#Informational {padding-top: 15px; padding-bottom: -20px; display:none;}
+/* Custom Style for "Events" title */
+#Events {padding-top: 15px; padding-bottom: -20px; display:none;}
 
-/* Add pointer for "Informational" title */
-#Informational:hover {cursor:pointer;}
+/* Add pointer for "Events" title */
+#Events:hover {cursor:pointer;}
 
-/* Custom Style for "Informational_Container" container */
-#Informational_Container {display:none;}
+/* Custom Style for "Events_Container" container */
+#Events_Container {display:none;}
+
+/* Custom Style for "Maintenances" title */
+#Maintenances {padding-top: 15px; padding-bottom: -20px; display:none;}
+
+/* Add pointer for "Maintenances" title */
+#Maintenances:hover {cursor:pointer;}
+
+/* Custom Style for "Maintenances_Container" container */
+#Maintenances_Container {display:none;}
+
+/* Custom Style for "Informationals" title */
+#Informationals {padding-top: 15px; padding-bottom: -20px; display:none;}
+
+/* Add pointer for "Informationals" title */
+#Informationals:hover {cursor:pointer;}
+
+/* Custom Style for "Informationals_Container" container */
+#Informationals_Container {display:none;}
 
 /* Hides the components legend */
 .layout-content.status.status-index .components-section .component-statuses-legend {display:none;}
