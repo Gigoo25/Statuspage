@@ -159,6 +159,9 @@
 				// Hide cover once page is fully loaded
 				HideCover ();
 		  }
+
+			// Correct past incident text if there is no past incidents for that day.
+			$(".incidents-list.format-expanded.span4").find(".status-day.font-regular").find("p.color-secondary").text("There are no reportable incidents.");
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
