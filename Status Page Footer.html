@@ -122,22 +122,14 @@
 				// Show Events title/container if major incidents are present
 			if($('.unresolved-incident.impact-minor').length){
 					// Show open incidents title/container
-								// **Temporaroly enable outages container & title**
-				$('#Outages').show();
-				$('#Outages_Container').show();
-							// **Disabled Title**
-				//$('#Events').show();
+				$('#Events').show();
 				$('#Events_Container').show();
 			};
 
 				// Show Maintenances title/container if major incidents are present
 			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-none').length){
 					// Show open incidents title/container
-								// **Temporaroly enable outages container & title**
-				$('#Outages').show();
-				$('#Outages_Container').show();
-							// **Disabled Title**
-				//$('#Maintenances').show();
+				$('#Maintenances').show();
 				$('#Maintenances_Container').show();
 			};
 
