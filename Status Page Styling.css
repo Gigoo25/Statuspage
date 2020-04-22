@@ -33,25 +33,19 @@ img {
 
 /* Button to go to the top customization */
 #topBtn {
-  border-radius: 50px;
-  -moz-border-radius: 50px;
-  -webkit-border-radius: 50px;
-  -o-border-radius: 50px;
-  -ms-border-radius: 50px;
-  display: inline-block;
-  font-size: 2rem;
-  height: 35px;
-  line-height: 35px;
-  width: 35px;
-  color: #747474;
-  border: 2px solid #747474;
-  text-align: center;
-  font-weight: 500;
+  border: none;
+  background-color: #0442BB;
+  padding: 14px 28px;
+  font-size: 30px;
   cursor: pointer;
+  display: inline-block;
+  position: absolute;
   position: fixed;
   bottom: 10px;
   right: 5px;
-  background: transparent;
+  color: #ffffff;
+  font-weight: 500;
+  line-height: 15px;
   outline: none;
   display: none;
   z-index: 99;
@@ -59,10 +53,7 @@ img {
 
 /* Button to go to the top customization when hovered over */
 #topBtn:hover {
-  background-color: #333;
-  color: #ffffff;
-  background: #333;
-  border: 2px solid #333;
+  background-color: #022E82;
 }
 
 /* Button to go to the top remove blue border once button is clicked */
@@ -270,3 +261,5 @@ img {
 .layout-content.status.status-index .incidents-list .incident-title.impact-minor a {color: #f1c40f;}
 /* Event History Title Color */
 .layout-content.status-full-history .month .incident-container .impact-minor {color: #f1c40f;}
+
+.layout-content.status.status-index .components-section .component-container.is-group>.component-inner-container .name {font-size: 22px;}
