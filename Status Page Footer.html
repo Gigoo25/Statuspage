@@ -162,6 +162,8 @@
 
 			// Correct past incident text if there is no past incidents for that day.
 			$(".incidents-list.format-expanded.span4").find(".status-day.font-regular").find("p.color-secondary").text("There are no reportable incidents.");
+
+			CorrectPastMaintenances();
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
@@ -265,6 +267,27 @@
 			$(".component-container, .border-color, .is-group").toggleClass("open",false);
 			$(".group-parent-indicator").toggleClass("fa-plus-square-o",true);
 			$(".group-parent-indicator").toggleClass("fa-minus-square-o",false);
+		};
+
+		function CorrectPastMaintenances () {
+			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "sssaaaes" );
+			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
+				var text = $(this).text();
+				//$(this).text(text.replace('Resolved', 'Completed'));
+				$(this).addClass( "popo" );
+			});
+			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.resolved").children().each(function() {
+				var text = $(this).text();
+				$(this).addClass( "popo222" );
+			});
+			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.resolved:not([popo222])").children().each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('This incident has been resolved.', 'Maint'));
+			});
+			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
+				var text = $(this).text();
+				//$(this).text(text.replace('Identified', 'In Progress'));
+			});
 		};
 
 	</script>
