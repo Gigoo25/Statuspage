@@ -163,7 +163,12 @@
 			// Correct past incident text if there is no past incidents for that day.
 			$(".incidents-list.format-expanded.span4").find(".status-day.font-regular").find("p.color-secondary").text("There are no reportable incidents.");
 
-			CorrectPastMaintenances();
+			// Call function to correct text for maintenances in the "Past Incidents"
+			CorrectPastMaintenancesText();
+			// Call function to correct text for maintenances in the "Single Incidents"
+			SingleIncidentMaintenancesText();
+			// Call function to correct text for maintenances in the "Open Incidents"
+			CorrectCurrentMaintenancesText();
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
@@ -269,26 +274,52 @@
 			$(".group-parent-indicator").toggleClass("fa-minus-square-o",false);
 		};
 
-		function CorrectPastMaintenances () {
-			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "sssaaaes" );
-			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
+	  // Correct text for maintenances in the "Open Incidents"
+		function CorrectCurrentMaintenancesText () {
+			// Replace "strong" text
+			$(".unresolved-incident.impact-none").find(".updates.font-regular").find(".update").find("strong").each(function() {
 				var text = $(this).text();
-				//$(this).text(text.replace('Resolved', 'Completed'));
-				$(this).addClass( "popo" );
-			});
-			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.resolved").children().each(function() {
-				var text = $(this).text();
-				$(this).addClass( "popo222" );
-			});
-			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.resolved:not([popo222])").children().each(function() {
-				var text = $(this).text();
-				$(this).text(text.replace('This incident has been resolved.', 'Maint'));
-			});
-			$(".incident-container.sssaaaes").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
-				var text = $(this).text();
-				//$(this).text(text.replace('Identified', 'In Progress'));
+				$(this).text(text.replace('Identified', 'In Progress'));
 			});
 		};
 
+		// Correct text for maintenances in the "Single Incidents"
+		function SingleIncidentMaintenancesText () {
+			// Replace "strong" text
+			$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Resolved', 'Completed'));
+			});
+			$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Identified', 'In Progress'));
+			});
+			// Replace description text
+			$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('This incident has been resolved.', 'Maintenance has been completed.'));
+			});
+		};
+
+		// Correct text for maintenances in the "Past Incidents"
+		function CorrectPastMaintenancesText () {
+			// Replace "strong" text
+			$(".incident-container").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Identified', 'In Progress'));
+			});
+			$(".incident-container").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Resolved', 'Completed'));
+			});
+			// Replace description text
+			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "maintenance" );
+			var text = $(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved")
+			  .contents()
+			  .filter(function() {
+			    return this.length ===  52; // Default length of " - This incident has been resolved."
+			  });
+			text.replaceWith(" - Maintenance has been completed.");
+		};
 	</script>
 </html>
