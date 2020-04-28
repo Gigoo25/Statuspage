@@ -285,35 +285,40 @@
 
 		// Correct text for maintenances in the "Single Incidents"
 		function SingleIncidentMaintenancesText () {
-			// Replace "strong" text
-			$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
-				var text = $(this).text();
-				$(this).text(text.replace('Resolved', 'Completed'));
-			});
-			$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
-				var text = $(this).text();
-				$(this).text(text.replace('Identified', 'In Progress'));
-			});
-			// Replace description text
-			$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
-				var text = $(this).text();
-				$(this).text(text.replace('This incident has been resolved.', 'Maintenance has been completed.'));
-			});
+			// Add a maintenance class to be able to ifentify weather its a maintenance or not
+			$(".incident-name:contains('Maintenance')").parent().addClass( "maintenance" );
+			if ($('.page-title').hasClass("maintenance") !== false) {
+				// Replace "strong" text
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Resolved', 'Completed'));
+				});
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Identified', 'In Progress'));
+				});
+				// Replace description text
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('This incident has been resolved.', 'Maintenance has been completed.'));
+				});
+			};
 		};
 
 		// Correct text for maintenances in the "Past Incidents"
 		function CorrectPastMaintenancesText () {
+			// Add a maintenance class to be able to ifentify weather its a maintenance or not
+			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "maintenance" );
 			// Replace "strong" text
-			$(".incident-container").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
+			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
 			});
-			$(".incident-container").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
+			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Resolved', 'Completed'));
 			});
 			// Replace description text
-			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "maintenance" );
 			var text = $(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved")
 			  .contents()
 			  .filter(function() {
