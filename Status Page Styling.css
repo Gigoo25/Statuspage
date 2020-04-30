@@ -269,3 +269,5 @@ img {
 .pull-right {float: left;}
 /* Correct date/time display style for "scheduled maintenances" title */
 .layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title {display: grid;}
+/* Move date/time slightly up to make it a bit better looking under "scheduled maintenances" title */
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title small {top: -2px;}
