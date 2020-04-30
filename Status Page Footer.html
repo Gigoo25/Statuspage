@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<script>
+			// Replace "Had a major outage" with "Had and outage" in Component Status
+		$(function() {
+			$(document).ready(function() {
+				var str = document.getElementById("major-outage-group-count").innerHTML;
+				var res = str.replace(" had a major outage", " had an outage");
+				document.getElementById("major-outage-group-count").innerHTML = res;
+			});
+		});
+
 		// Button Functionality
 		//-----------------------------------
 			// Fade arrow up button after scrolling down some
@@ -211,30 +220,6 @@
 			$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
 			$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
 			$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
-				// **Second pass**
-					// Checking if the class does not exist
-					// This is for titles that have multiple matching words like "Informational" & "Event"
-					// This method is temporary until I can think of a more efficient way of writing this
-			if ($('.unresolved-incident').hasClass("impact-critical") !== false) {
-				$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
-				$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
-				$(".incident-name:contains('Outage')").removeClass().addClass( "color-primary incident-name impact-critical" );
-			};
-			if ($('.unresolved-incident').hasClass("impact-major") !== false) {
-				$(".incident-title:contains('Informational')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-major" );
-				$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
-				$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
-			};
-			if ($('.unresolved-incident').hasClass("impact-none") !== false) {
-				$(".incident-title:contains('Maintenance')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-none" );
-				$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
-				$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
-			};
-			if ($('.unresolved-incident').hasClass("impact-minor") !== false) {
-				$(".incident-title:contains('Event')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-minor" );
-				$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
-				$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
-			};
 		};
 
 		function UpdateRemoveOpenIncidents () {
@@ -322,10 +307,6 @@
 						//Replace "Major outage" with "Outage"
 					$(this).text(text.replace('Major Outage', 'Outage'));
 				});
-					// Replace "Had a major outage" with "Had and outage" in Component Status mouse hover popup
-				var str = document.getElementById("major-outage-group-count").innerHTML;
-				var res = str.replace(" had a major outage", " had an outage");
-				document.getElementById("major-outage-group-count").innerHTML = res;
 			};
 				// Define a function to replace "Partial Outage" text
 			function CorrectInformationalText () {
