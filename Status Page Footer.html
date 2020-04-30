@@ -12,17 +12,6 @@
 			});
 		});
 
-			// Replace "Component Status" titles
-		$('.component-status').each(function() {
-			var text = $(this).text();
-				//Replace "Major outage" with "Outage"
-			$(this).text(text.replace('Major Outage', 'Outage'));
-				//Replace "Partial Outage" with "Informational"
-			$(this).text(text.replace('Partial Outage', 'Informational'));
-				//Replace "Degraded Performance" with "Event"
-			$(this).text(text.replace('Degraded Performance', 'Event'));
-		});
-
 		// Button Functionality
 		//-----------------------------------
 			// Fade arrow up button after scrolling down some
@@ -169,6 +158,8 @@
 			SingleIncidentMaintenancesText();
 			// Call function to correct text for maintenances in the "Open Incidents"
 			CorrectCurrentMaintenancesText();
+			// Call function to replace "Component Status" titles
+			CorrectComponentStatusText();
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
@@ -327,6 +318,38 @@
 			    return this.length ===  52; // Default length of " - This incident has been resolved."
 			  });
 			text.replaceWith(" - Maintenance has been completed.");
+		};
+
+		// Define a function to replace "Component Status" titles
+		function CorrectComponentStatusText () {
+				// Define a function to replace "Major outage" text
+			function CorrectOutageText () {
+				$(".component-status").each(function() {
+					var text = $(this).text();
+						//Replace "Major outage" with "Outage"
+					$(this).text(text.replace('Major Outage', 'Outage'));
+				});
+			};
+				// Define a function to replace "Partial Outage" text
+			function CorrectInformationalText () {
+				$(".component-status").each(function() {
+					var text = $(this).text();
+						//Replace "Partial Outage" with "Informational"
+					$(this).text(text.replace('Partial Outage', 'Informational'));
+				});
+			};
+				// Define a function to replace "Degraded Performance" text
+			function CorrectEventText () {
+				$(".component-status").each(function() {
+					var text = $(this).text();
+						//Replace "Degraded Performance" with "Event"
+					$(this).text(text.replace('Degraded Performance', 'Event'));
+				});
+			};
+			// Call functions
+			CorrectOutageText();
+			CorrectInformationalText();
+			CorrectEventText();
 		};
 	</script>
 </html>
