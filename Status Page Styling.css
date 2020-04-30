@@ -261,4 +261,9 @@ img {
 /* Event History Title Color */
 .layout-content.status-full-history .month .incident-container .impact-minor {color: #f1c40f;}
 
+/* Adjust the size of the component status text */
 .layout-content.status.status-index .components-section .component-container.is-group>.component-inner-container .name {font-size: 22px;}
+/* Remove overflow block from "scheduled maintenances" title */
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a {max-width: 100%;}
+/* Move date under "scheduled maintenances" slightly up */
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title small {top: -5px;}

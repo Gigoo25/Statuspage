@@ -140,6 +140,8 @@
 				$('#portalBtn').removeClass('span8').prependTo($row);
 				// Hide cover once page is fully loaded
 				HideCover ();
+				// Call function to remove right the positioning of "scheduled maintenances" date/time text
+				RemovePullRightClass();
 		  } else {
 				// Format page layout
 				$('.components-section').addClass('span4').appendTo($row);
@@ -160,6 +162,8 @@
 			CorrectCurrentMaintenancesText();
 			// Call function to replace "Component Status" titles
 			CorrectComponentStatusText();
+			// Call function to remove right the positioning of "scheduled maintenances" date/time text
+			RemovePullRightClass();
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
@@ -350,6 +354,11 @@
 			CorrectOutageText();
 			CorrectInformationalText();
 			CorrectEventText();
+		};
+
+		// Remove right the positioning of "scheduled maintenances" date/time text
+		function RemovePullRightClass () {
+			$(".pull-right").removeClass();
 		};
 	</script>
 </html>
