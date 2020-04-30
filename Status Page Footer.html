@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<script>
-		// Text changes throughout the page
-		//---------------------------------
-			// Replace "Had a major outage" with "Had and outage" in Component Status
-		$(function() {
-			$(document).ready(function() {
-				var str = document.getElementById("major-outage-group-count").innerHTML;
-				var res = str.replace(" had a major outage", " had an outage");
-				document.getElementById("major-outage-group-count").innerHTML = res;
-			});
-		});
-
 		// Button Functionality
 		//-----------------------------------
 			// Fade arrow up button after scrolling down some
@@ -333,6 +322,10 @@
 						//Replace "Major outage" with "Outage"
 					$(this).text(text.replace('Major Outage', 'Outage'));
 				});
+					// Replace "Had a major outage" with "Had and outage" in Component Status mouse hover popup
+				var str = document.getElementById("major-outage-group-count").innerHTML;
+				var res = str.replace(" had a major outage", " had an outage");
+				document.getElementById("major-outage-group-count").innerHTML = res;
 			};
 				// Define a function to replace "Partial Outage" text
 			function CorrectInformationalText () {
@@ -354,11 +347,6 @@
 			CorrectOutageText();
 			CorrectInformationalText();
 			CorrectEventText();
-		};
-
-		// Remove right the positioning of "scheduled maintenances" date/time text
-		function RemovePullRightClass () {
-			$(".pull-right").removeClass();
 		};
 	</script>
 </html>
