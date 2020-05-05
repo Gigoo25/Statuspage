@@ -1,45 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<script>
-// Button Functionality
-		//-----------------------------------
-			// Fade arrow up button after scrolling down some
-		$(window).scroll(function() {
-			var height = $(window).scrollTop();
-			if (height > 650) {
-				$('#topBtn').fadeIn();
-			} else {
-				$('#topBtn').fadeOut();
-			}
-		});
-
-			// Scroll to top when arrow up clicked
-		function topFunction() {
-			document.querySelector('#custom-header').scrollIntoView({
-				behavior: 'smooth'
-			});
-		};
-
-			// Move support button after shrinking/increasing the window width
-		$(window).resize(function() {
-				var wi = $(window).width();
-				if (wi < 822) {
-					$('#portalBtn').appendTo('#custom-header');
-			}
-		});
-
-		// Unused components removal
-		//--------------------------
-			// Remove 90 day uptime link
-		$('.components-uptime-link').remove();
-
 		// Layout for components/page
 		//---------------------------
 			// Row Div creation - CUSTOM
 		$row = $('<div class="row"></div>');
 		$row.prependTo('.layout-content > .container');
 
-			// Set variables
+		// Set variables
 		var Outages = $('#Outages');
 		var Outages_Container = $('#Outages_Container');
 		var Events = $('#Events');
@@ -49,7 +17,7 @@
 		var Informationals = $('#Informationals');
 		var Informationals_Container = $('#Informationals_Container');
 
-			// Adjust layout based on size of the window without blocking the ability to copy text
+		// Adjust layout based on size of the window without blocking the ability to copy text
 		function applyLayout(x) {
 
 			// Correct color coding based on title
@@ -91,34 +59,34 @@
 			// Append "Incident List" to "Components section" to allow past incidents to be on the left side
 			$('.incidents-list.format-expanded').addClass('span4').appendTo($('.components-section'));
 
-				// Show Outages title/container if major incidents are present
+			// Show Outages title/container if major incidents are present
 			if($('.unresolved-incident.impact-critical').length){
-					// Show open incidents title/container
+				// Show open incidents title/container
 				$('#Outages').show();
 				$('#Outages_Container').show();
 			};
 
-				// Show Events title/container if major incidents are present
+			// Show Events title/container if major incidents are present
 			if($('.unresolved-incident.impact-minor').length){
-					// Show open incidents title/container
+				// Show open incidents title/container
 				$('#Events').show();
 				$('#Events_Container').show();
 			};
 
-				// Show Maintenances title/container if major incidents are present
+			// Show Maintenances title/container if major incidents are present
 			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-none').length){
-					// Show open incidents title/container
+				// Show open incidents title/container
 				$('#Maintenances').show();
 				$('#Maintenances_Container').show();
 			};
 
-				// Show Informationals title/container if major incidents are present
+			// Show Informationals title/container if major incidents are present
 			if($('.unresolved-incident.impact-major').length){
 			  $('#Informationals').show();
 			  $('#Informationals_Container').show();
 			};
 
-				// Remove subscribe button from incidents
+			// Remove subscribe button from incidents
 			$('.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .subscribe').remove();
 			$('.flat-button, .subscribe-button').remove();
 
@@ -156,7 +124,7 @@
 		applyLayout(x) // Call listener function at run time
 		x.addListener(applyLayout) // Attach listener function on state changes
 
-			// Correct title color in the "incidents" page
+		// Correct title color in the "incidents" page
 		$( window ).on( "load", function() {
 			if(location.pathname=="/incidents/") {
 				ColorCorrect ();
@@ -171,16 +139,46 @@
 			$('.status-day:nth-child(n+4)').remove();
 		});
 
-			// Assign id to history expand incident buttons
+		// Assign id to history expand incident buttons
 		$(document).ready(function(){
 			$('.expand-incidents').attr('id', 'button1');
 			// Call "ColorCorrect" to correct colors for the first 3 incidents of the "History" page
 			ColorCorrect ();
 		});
 
-			// Call function when history expand incident buttons are clicked
+		// Call function when history expand incident buttons are clicked
 		$(document).on('click', '#button1', function(event) {
 			setTimeout(ColorCorrect, 200)
+		});
+
+		// Remove 90 day uptime link
+		$('.components-uptime-link').remove();
+
+		// Button Functionality
+		//-----------------------------------
+			// Fade arrow up button after scrolling down some
+		$(window).scroll(function() {
+			var height = $(window).scrollTop();
+			if (height > 650) {
+				$('#topBtn').fadeIn();
+			} else {
+				$('#topBtn').fadeOut();
+			}
+		});
+
+		// Scroll to top when arrow up clicked
+		function topFunction() {
+			document.querySelector('#custom-header').scrollIntoView({
+				behavior: 'smooth'
+			});
+		};
+
+		// Move support button after shrinking/increasing the window width
+		$(window).resize(function() {
+				var wi = $(window).width();
+				if (wi < 822) {
+					$('#portalBtn').appendTo('#custom-header');
+			}
 		});
 
 		// Functions
@@ -191,42 +189,44 @@
 			 $(".spinner").hide();
 		};
 
-			// Correct color coding based on title
+		// Correct color coding based on title
 		function ColorCorrect () {
-				// Correct color for open incidents
+			// Correct color for open incidents
 			$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
 			$(".incident-title:contains('Informational')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-major" );
 			$(".incident-title:contains('Maintenance')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-none" );
 			$(".incident-title:contains('Event')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-minor" );
-				// Correct color for past incidents
+			// Correct color for past incidents
 			$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
 			$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
 			$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
 			$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
-				// Correct color for single incidents
+			// Correct color for single incidents
 			$(".incident-name:contains('Outage')").removeClass().addClass( "color-primary incident-name impact-critical" );
 			$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
 			$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
 			$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
 		};
 
+		// Remove generic/accidental updates from "Open incidents"
 		function UpdateRemoveOpenIncidents () {
-				// Remove accidental "Updates" from open incidents as this causes clutter on the page
+			// Remove accidental "Updates" from open incidents as this causes clutter on the page
 			$(".update:contains(' - We are continuing to investigate this issue.')").remove();
 			$(".update:contains(' - We are continuing to monitor for any further issues.')").remove();
 			$(".update:contains(' - We are continuing to work on a fix for this issue.')").remove();
 		};
 
+		// Remove generic/accidental updates from "Past incidents"
 		function UpdateRemovePastIncidents () {
-				// Add an additional "update" class to the correct updates to be able to manipulate them
+			// Add an additional "update" class to the correct updates to be able to manipulate them
 			$('div.update.font-regular:not(.update.font-regular.resolved,.update.font-regular.monitoring,.update.font-regular.identified,.update.font-regular.investigating,.update.font-regular.completed,.update.font-regular.in.progress,.update.font-regular.scheduled)').addClass("update");
-				// Remove accidental "Updates" from past incidents as this causes clutter on the page
+			// Remove accidental "Updates" from past incidents as this causes clutter on the page
 			$(".update.font-regular.update.update:contains('We are continuing to investigate this issue.')").remove();
 			$(".update.font-regular.update.update:contains('We are continuing to monitor for any further issues.')").remove();
 			$(".update.font-regular.update.update:contains('We are continuing to work on a fix for this issue.')").remove();
 		};
 
-			// Close components that are open & change the minus square to a plus
+		// Close components that are open & change the minus square to a plus
 		function ComponentClose () {
 			$(".component-container, .border-color, .is-group").toggleClass("open",false);
 			$(".group-parent-indicator").toggleClass("fa-plus-square-o",true);
@@ -288,30 +288,33 @@
 
 		// Define a function to replace "Component Status" titles
 		function CorrectComponentStatusText () {
-				// Define a function to replace "Major outage" text
+			// Define a function to replace "Major outage" text
 			function CorrectOutageText () {
 				$(".component-status").each(function() {
 					var text = $(this).text();
-						//Replace "Major outage" with "Outage"
+					//Replace "Major outage" with "Outage"
 					$(this).text(text.replace('Major Outage', 'Outage'));
 				});
 			};
-				// Define a function to replace "Partial Outage" text
+
+			// Define a function to replace "Partial Outage" text
 			function CorrectInformationalText () {
 				$(".component-status").each(function() {
 					var text = $(this).text();
-						//Replace "Partial Outage" with "Informational"
+					//Replace "Partial Outage" with "Informational"
 					$(this).text(text.replace('Partial Outage', 'Informational'));
 				});
 			};
-				// Define a function to replace "Degraded Performance" text
+
+			// Define a function to replace "Degraded Performance" text
 			function CorrectEventText () {
 				$(".component-status").each(function() {
 					var text = $(this).text();
-						//Replace "Degraded Performance" with "Event"
+					//Replace "Degraded Performance" with "Event"
 					$(this).text(text.replace('Degraded Performance', 'Event'));
 				});
 			};
+
 			// Call functions
 			CorrectOutageText();
 			CorrectInformationalText();
