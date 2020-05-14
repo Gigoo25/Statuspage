@@ -17,34 +17,35 @@
 		var Informationals = $('#Informationals');
 		var Informationals_Container = $('#Informationals_Container');
 
-		// Adjust layout based on size of the window without blocking the ability to copy text
+		// Adjust layout based on size of the window without blocking the ability to copy text.
+			// This will also call most functions that cause the required page changes.
 		function applyLayout(x) {
 
-			// Correct color coding based on title
+			// Call function to correct color coding based on title
 			ColorCorrect ();
 
-			// Remove unnecessary updates from open incidents
+			// Call function to remove unnecessary updates from open incidents
 			UpdateRemoveOpenIncidents ();
 
-			// Remove unnecessary updates from past incidents
+			// Call function to remove unnecessary updates from past incidents
 			UpdateRemovePastIncidents ();
 
-			// Close components that are open
+			// Call function to close components that are open
 			ComponentClose ();
 
-			// Place titles above containers
+			// Place titles above defined containers
 			Outages.prependTo($(Outages_Container));
 			Events.prependTo($(Events_Container));
 			Maintenances.prependTo($(Maintenances_Container));
 			Informationals.prependTo($(Informationals_Container));
 
-			// Place incidents into containers
+			// Place all containes in the same stop as the open incidents
 			Outages_Container.appendTo($('.unresolved-incidents'));
 			Events_Container.appendTo($('.unresolved-incidents'));
 			Maintenances_Container.appendTo($('.unresolved-incidents'));
 			Informationals_Container.appendTo($('.unresolved-incidents'));
 
-			// Place incidents into containers
+			// Place incidents into defined containers
 			$('.unresolved-incident.impact-critical').appendTo($(Outages_Container));
 			$('.unresolved-incident.impact-minor').appendTo($(Events_Container));
 			$('.unresolved-incident.impact-none, .unresolved-incident.impact-maintenance').appendTo($(Maintenances_Container));
@@ -96,14 +97,14 @@
 				$('.unresolved-incidents').removeClass('span8').prependTo($row);
 				$('.page-status.status-none').removeClass('span8').prependTo($row);
 				$('#portalBtn').removeClass('span8').prependTo($row);
-				// Hide cover once page is fully loaded
+				// Call function to hide cover once page is fully loaded
 				HideCover ();
 		  } else {
 				// Format page layout
 				$('.components-section').addClass('span4').appendTo($row);
 				$('.unresolved-incidents').addClass('span8').appendTo($row);
 				$('.page-status.status-none').addClass('span8').appendTo($row);
-				// Hide cover once page is fully loaded
+				// Call function to hide cover once page is fully loaded
 				HideCover ();
 		  }
 
@@ -124,7 +125,7 @@
 		applyLayout(x) // Call listener function at run time
 		x.addListener(applyLayout) // Attach listener function on state changes
 
-		// Correct title color in the "incidents" page
+		// Call function to correct title color in the "incidents" page
 		$( window ).on( "load", function() {
 			if(location.pathname=="/incidents/") {
 				ColorCorrect ();
@@ -189,7 +190,7 @@
 			 $(".spinner").hide();
 		};
 
-		// Correct color coding based on title
+		// Correct color coding based on title no mater what the severity is
 		function ColorCorrect () {
 			// Correct color for open incidents
 			$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
@@ -235,7 +236,7 @@
 
 	  // Correct text for maintenances in the "Open Incidents"
 		function CorrectCurrentMaintenancesText () {
-			// Replace "strong" text
+			// Replace "strong" text within the contents of the incident
 			$(".unresolved-incident.impact-none").find(".updates.font-regular").find(".update").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
@@ -244,10 +245,11 @@
 
 		// Correct text for maintenances in the "Single Incidents"
 		function SingleIncidentMaintenancesText () {
-			// Add a maintenance class to be able to ifentify weather its a maintenance or not
+			// Add a maintenance class to be able to identify wether its a maintenance or not
 			$(".incident-name:contains('Maintenance')").parent().addClass( "maintenance" );
+			// If the title contains the previously added "Maintenance" class then continue
 			if ($('.page-title').hasClass("maintenance") !== false) {
-				// Replace "strong" text
+				// Replace "strong" text within the contents of the incident
 				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
 					var text = $(this).text();
 					$(this).text(text.replace('Resolved', 'Completed'));
@@ -256,7 +258,7 @@
 					var text = $(this).text();
 					$(this).text(text.replace('Identified', 'In Progress'));
 				});
-				// Replace description text
+				// Replace description text after the "strong" text within the description
 				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
 					var text = $(this).text();
 					$(this).text(text.replace('This incident has been resolved.', 'Maintenance has been completed.'));
@@ -266,9 +268,9 @@
 
 		// Correct text for maintenances in the "Past Incidents"
 		function CorrectPastMaintenancesText () {
-			// Add a maintenance class to be able to ifentify weather its a maintenance or not
+			// Add a maintenance class to be able to identify wether its a maintenance or not
 			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "maintenance" );
-			// Replace "strong" text
+			// Replace "strong" text within the contents of the incident
 			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
@@ -277,7 +279,7 @@
 				var text = $(this).text();
 				$(this).text(text.replace('Resolved', 'Completed'));
 			});
-			// Replace description text
+			// Replace description text after the "strong" text within the description
 			var text = $(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved")
 			  .contents()
 			  .filter(function() {
