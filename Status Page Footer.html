@@ -1,91 +1,55 @@
 <!DOCTYPE html>
 <html>
 	<script>
-		// Text changes throughout the page
-		//---------------------------------
-			//Replace "Had a major outage" with "Had and outage" in Component Status
-		$(function() {
-			$(document).ready(function() {
-				var str = document.getElementById("major-outage-group-count").innerHTML;
-				var res = str.replace(" had a major outage", " had an outage");
-				document.getElementById("major-outage-group-count").innerHTML = res;
-			});
-		});
-
-			//Replace "Component Status" titles
-		$('.component-status').each(function() {
-			var text = $(this).text();
-				//Replace "Major outage" with "Outage"
-			$(this).text(text.replace('Major Outage', 'Outage'));
-				//Replace "Partial Outage" with "Informational"
-			$(this).text(text.replace('Partial Outage', 'Informational'));
-				//Replace "Degraded Performance" with "Event"
-			$(this).text(text.replace('Degraded Performance', 'Event'));
-		});
-
-		// Button Functionality
-		//-----------------------------------
-			//Fade arrow up button after scrolling down some
-		$(window).scroll(function() {
-			var height = $(window).scrollTop();
-			if (height > 650) {
-				$('#topBtn').fadeIn();
-			} else {
-				$('#topBtn').fadeOut();
-			}
-		});
-
-			//Scroll to top when arrow up clicked
-		function topFunction() {
-			document.querySelector('#custom-header').scrollIntoView({
-				behavior: 'smooth'
-			});
-		};
-
-			//Move support button after shrinking/increasing the window width
-		$(window).resize(function() {
-				var wi = $(window).width();
-				if (wi < 822) {
-					$('#portalBtn').appendTo('#custom-header');
-			}
-		});
-
-		// Unused components removal
-		//--------------------------
-			//Remove 90 day uptime link
-		$('.components-uptime-link').remove();
-
 		// Layout for components/page
 		//---------------------------
 			// Row Div creation - CUSTOM
 		$row = $('<div class="row"></div>');
 		$row.prependTo('.layout-content > .container');
 
-			// Set variables
-		var Informational = $('#Informational');
-		var Informational_Container = $('#Informational_Container');
-		var Open_Incidents = $('#Open_Incidents');
-		var Open_Incidents_Container = $('#Open_Incidents_Container');
+		// Set variables
+		var Outages = $('#Outages');
+		var Outages_Container = $('#Outages_Container');
+		var Events = $('#Events');
+		var Events_Container = $('#Events_Container');
+		var Maintenances = $('#Maintenances');
+		var Maintenances_Container = $('#Maintenances_Container');
+		var Informationals = $('#Informationals');
+		var Informationals_Container = $('#Informationals_Container');
 
-			//Adjust layout based on size of the window without blocking the ability to copy text
+		// Adjust layout based on size of the window without blocking the ability to copy text.
+			// This will also call most functions that cause the required page changes.
 		function applyLayout(x) {
-			// Correct color coding based on title
+
+			// Call function to correct color coding based on title
 			ColorCorrect ();
 
-			// Close components that are open
+			// Call function to remove unnecessary updates from open incidents
+			UpdateRemoveOpenIncidents ();
+
+			// Call function to remove unnecessary updates from past incidents
+			UpdateRemovePastIncidents ();
+
+			// Call function to close components that are open
 			ComponentClose ();
 
-			// Place titles above containers
-			Informational.prependTo($(Informational_Container));
-			Open_Incidents.prependTo($(Open_Incidents_Container));
+			// Place titles above defined containers
+			Outages.prependTo($(Outages_Container));
+			Events.prependTo($(Events_Container));
+			Maintenances.prependTo($(Maintenances_Container));
+			Informationals.prependTo($(Informationals_Container));
 
-			// Place incidents into containers
-			Open_Incidents_Container.appendTo($('.unresolved-incidents'));
-			Informational_Container.appendTo($('.unresolved-incidents'));
+			// Place all containes in the same stop as the open incidents
+			Outages_Container.appendTo($('.unresolved-incidents'));
+			Events_Container.appendTo($('.unresolved-incidents'));
+			Maintenances_Container.appendTo($('.unresolved-incidents'));
+			Informationals_Container.appendTo($('.unresolved-incidents'));
 
-			// Place incidents into containers
-			$('.unresolved-incident.impact-major').appendTo($(Informational_Container));
-			$('.unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-maintenance, .unresolved-incident.impact-critical').appendTo($(Open_Incidents_Container));
+			// Place incidents into defined containers
+			$('.unresolved-incident.impact-critical').appendTo($(Outages_Container));
+			$('.unresolved-incident.impact-minor').appendTo($(Events_Container));
+			$('.unresolved-incident.impact-none, .unresolved-incident.impact-maintenance').appendTo($(Maintenances_Container));
+			$('.unresolved-incident.impact-major').appendTo($(Informationals_Container));
 
 			// Place scheduled maintenance container above past incidents
 			$('.scheduled-maintenances-container').prependTo($('#past-incidents'));
@@ -96,22 +60,34 @@
 			// Append "Incident List" to "Components section" to allow past incidents to be on the left side
 			$('.incidents-list.format-expanded').addClass('span4').appendTo($('.components-section'));
 
-			// Show informational title/container if major incidents are present
+			// Show Outages title/container if major incidents are present
+			if($('.unresolved-incident.impact-critical').length){
+				// Show open incidents title/container
+				$('#Outages').show();
+				$('#Outages_Container').show();
+			};
+
+			// Show Events title/container if major incidents are present
+			if($('.unresolved-incident.impact-minor').length){
+				// Show open incidents title/container
+				$('#Events').show();
+				$('#Events_Container').show();
+			};
+
+			// Show Maintenances title/container if major incidents are present
+			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-none').length){
+				// Show open incidents title/container
+				$('#Maintenances').show();
+				$('#Maintenances_Container').show();
+			};
+
+			// Show Informationals title/container if major incidents are present
 			if($('.unresolved-incident.impact-major').length){
-			  $('#Informational').show();
-			  $('#Informational_Container').show();
+			  $('#Informationals').show();
+			  $('#Informationals_Container').show();
 			};
 
-				// Run functions if none, minor & critical incidents are present
-			if($('.unresolved-incident.impact-maintenance, .unresolved-incident.impact-minor, .unresolved-incident.impact-none, .unresolved-incident.impact-critical').length){
-					// Show open incidents title/container
-				$('#Open_Incidents').show();
-				$('#Open_Incidents_Container').show();
-					// Sort incidents by severity
-				SortIncidents ();
-			};
-
-				// Remove subscribe button from incidents
+			// Remove subscribe button from incidents
 			$('.layout-content.status.status-index .unresolved-incidents .unresolved-incident .incident-title .subscribe').remove();
 			$('.flat-button, .subscribe-button').remove();
 
@@ -121,23 +97,35 @@
 				$('.unresolved-incidents').removeClass('span8').prependTo($row);
 				$('.page-status.status-none').removeClass('span8').prependTo($row);
 				$('#portalBtn').removeClass('span8').prependTo($row);
-				// Hide cover once page is fully loaded
+				// Call function to hide cover once page is fully loaded
 				HideCover ();
 		  } else {
 				// Format page layout
 				$('.components-section').addClass('span4').appendTo($row);
 				$('.unresolved-incidents').addClass('span8').appendTo($row);
 				$('.page-status.status-none').addClass('span8').appendTo($row);
-				// Hide cover once page is fully loaded
+				// Call function to hide cover once page is fully loaded
 				HideCover ();
 		  }
+
+			// Correct past incident text if there is no past incidents for that day.
+			$(".incidents-list.format-expanded.span4").find(".status-day.font-regular").find("p.color-secondary").text("There are no reportable incidents.");
+
+			// Call function to correct text for maintenances in the "Past Incidents"
+			CorrectPastMaintenancesText();
+			// Call function to correct text for maintenances in the "Single Incidents"
+			SingleIncidentMaintenancesText();
+			// Call function to correct text for maintenances in the "Open Incidents"
+			CorrectCurrentMaintenancesText();
+			// Call function to replace "Component Status" titles
+			CorrectComponentStatusText();
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
 		applyLayout(x) // Call listener function at run time
 		x.addListener(applyLayout) // Attach listener function on state changes
 
-			// Correct title color in the "incidents" page
+		// Call function to correct title color in the "incidents" page
 		$( window ).on( "load", function() {
 			if(location.pathname=="/incidents/") {
 				ColorCorrect ();
@@ -146,20 +134,52 @@
 
 		// Other Changes
 		//---------------------------
-			//Limit History
-		  	//Replace "x" with the number of days you want to show + 2
+			// Limit History
+		  	// Replace "x" with the number of days you want to show + 2
 		$(function() {
 			$('.status-day:nth-child(n+4)').remove();
 		});
 
-			// Assign id to history expand incident buttons
+		// Assign id to history expand incident buttons
 		$(document).ready(function(){
 			$('.expand-incidents').attr('id', 'button1');
+			// Call "ColorCorrect" to correct colors for the first 3 incidents of the "History" page
+			ColorCorrect ();
 		});
 
-			// Call function when history expand incident buttons are clicked
+		// Call function when history expand incident buttons are clicked
 		$(document).on('click', '#button1', function(event) {
 			setTimeout(ColorCorrect, 200)
+		});
+
+		// Remove 90 day uptime link
+		$('.components-uptime-link').remove();
+
+		// Button Functionality
+		//-----------------------------------
+			// Fade arrow up button after scrolling down some
+		$(window).scroll(function() {
+			var height = $(window).scrollTop();
+			if (height > 650) {
+				$('#topBtn').fadeIn();
+			} else {
+				$('#topBtn').fadeOut();
+			}
+		});
+
+		// Scroll to top when arrow up clicked
+		function topFunction() {
+			document.querySelector('#custom-header').scrollIntoView({
+				behavior: 'smooth'
+			});
+		};
+
+		// Move support button after shrinking/increasing the window width
+		$(window).resize(function() {
+				var wi = $(window).width();
+				if (wi < 822) {
+					$('#portalBtn').appendTo('#custom-header');
+			}
 		});
 
 		// Functions
@@ -170,65 +190,137 @@
 			 $(".spinner").hide();
 		};
 
-			// Correct color coding based on title
+		// Correct color coding based on title no mater what the severity is
 		function ColorCorrect () {
-				// Correct color for open incidents
+			// Correct color for open incidents
 			$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
 			$(".incident-title:contains('Informational')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-major" );
 			$(".incident-title:contains('Maintenance')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-none" );
 			$(".incident-title:contains('Event')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-minor" );
-				// Correct color for past incidents
+			// Correct color for past incidents
 			$(".incident-title:contains('Outage')").removeClass().addClass( "incident-title impact-critical font-large" );
 			$(".incident-title:contains('Informational')").removeClass().addClass( "incident-title impact-major font-large" );
 			$(".incident-title:contains('Maintenance')").removeClass().addClass( "incident-title impact-none font-large" );
 			$(".incident-title:contains('Event')").removeClass().addClass( "incident-title impact-minor font-large" );
-				// Correct color for single incidents
+			// Correct color for single incidents
 			$(".incident-name:contains('Outage')").removeClass().addClass( "color-primary incident-name impact-critical" );
 			$(".incident-name:contains('Informational')").removeClass().addClass( "color-primary incident-name impact-major" );
 			$(".incident-name:contains('Maintenance')").removeClass().addClass( "color-primary incident-name impact-maintenance" );
 			$(".incident-name:contains('Event')").removeClass().addClass( "color-primary incident-name impact-minor" );
 		};
 
-			// Close components that are open & change the minus square to a plus
+		// Remove generic/accidental updates from "Open incidents"
+		function UpdateRemoveOpenIncidents () {
+			// Remove accidental "Updates" from open incidents as this causes clutter on the page
+			$(".update:contains(' - We are continuing to investigate this issue.')").remove();
+			$(".update:contains(' - We are continuing to monitor for any further issues.')").remove();
+			$(".update:contains(' - We are continuing to work on a fix for this issue.')").remove();
+		};
+
+		// Remove generic/accidental updates from "Past incidents"
+		function UpdateRemovePastIncidents () {
+			// Add an additional "update" class to the correct updates to be able to manipulate them
+			$('div.update.font-regular:not(.update.font-regular.resolved,.update.font-regular.monitoring,.update.font-regular.identified,.update.font-regular.investigating,.update.font-regular.completed,.update.font-regular.in.progress,.update.font-regular.scheduled)').addClass("update");
+			// Remove accidental "Updates" from past incidents as this causes clutter on the page
+			$(".update.font-regular.update.update:contains('We are continuing to investigate this issue.')").remove();
+			$(".update.font-regular.update.update:contains('We are continuing to monitor for any further issues.')").remove();
+			$(".update.font-regular.update.update:contains('We are continuing to work on a fix for this issue.')").remove();
+		};
+
+		// Close components that are open & change the minus square to a plus
 		function ComponentClose () {
 			$(".component-container, .border-color, .is-group").toggleClass("open",false);
 			$(".group-parent-indicator").toggleClass("fa-plus-square-o",true);
 			$(".group-parent-indicator").toggleClass("fa-minus-square-o",false);
 		};
 
-			// Close components that are open & change the minus square to a plus
-		function SortIncidents () {
-			var $OpenIncidentsList = $('#Open_Incidents_Container');
-
-			// Elements one layer deep get .children(), any deeper go with .find()
-			var $Incidents = $OpenIncidentsList.children('.unresolved-incident');
-
-			/* Bind $incidents to the sort method so we don't have to travel up all these properties more than once.*/
-			var sortList = Array.prototype.sort.bind($Incidents);
-
-			sortList(function ( a, b ) {
-
-			    // Cache inner content from the first element (a) and the next sibling (b)
-			    var aText = a.innerHTML;
-			    var bText = b.innerHTML;
-
-			    // Returning -1 will place element `a` before element `b`
-			    if ( aText < bText ) {
-			        return -1;
-			    }
-
-			    // Returning 1 will do the opposite
-			    if ( aText > bText ) {
-			        return 1;
-			    }
-
-			    // Returning 0 leaves them as-is
-			    return 0;
+	  // Correct text for maintenances in the "Open Incidents"
+		function CorrectCurrentMaintenancesText () {
+			// Replace "strong" text within the contents of the incident
+			$(".unresolved-incident.impact-none").find(".updates.font-regular").find(".update").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Identified', 'In Progress'));
 			});
-
-			// Put it right back where we got it
-			$OpenIncidentsList.append($Incidents);
 		};
 
+		// Correct text for maintenances in the "Single Incidents"
+		function SingleIncidentMaintenancesText () {
+			// Add a maintenance class to be able to identify wether its a maintenance or not
+			$(".incident-name:contains('Maintenance')").parent().addClass( "maintenance" );
+			// If the title contains the previously added "Maintenance" class then continue
+			if ($('.page-title').hasClass("maintenance") !== false) {
+				// Replace "strong" text within the contents of the incident
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Resolved', 'Completed'));
+				});
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Identified', 'In Progress'));
+				});
+				// Replace description text after the "strong" text within the description
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('This incident has been resolved.', 'Maintenance has been completed.'));
+				});
+			};
+		};
+
+		// Correct text for maintenances in the "Past Incidents"
+		function CorrectPastMaintenancesText () {
+			// Add a maintenance class to be able to identify wether its a maintenance or not
+			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "maintenance" );
+			// Replace "strong" text within the contents of the incident
+			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Identified', 'In Progress'));
+			});
+			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Resolved', 'Completed'));
+			});
+			// Replace description text after the "strong" text within the description
+			var text = $(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved")
+			  .contents()
+			  .filter(function() {
+			    return this.length ===  52; // Default length of " - This incident has been resolved."
+			  });
+			text.replaceWith(" - Maintenance has been completed.");
+		};
+
+		// Define a function to replace "Component Status" titles
+		function CorrectComponentStatusText () {
+			// Define a function to replace "Major outage" text
+			function CorrectOutageText () {
+				$(".component-status").each(function() {
+					var text = $(this).text();
+					//Replace "Major outage" with "Outage"
+					$(this).text(text.replace('Major Outage', 'Outage'));
+				});
+			};
+
+			// Define a function to replace "Partial Outage" text
+			function CorrectInformationalText () {
+				$(".component-status").each(function() {
+					var text = $(this).text();
+					//Replace "Partial Outage" with "Informational"
+					$(this).text(text.replace('Partial Outage', 'Informational'));
+				});
+			};
+
+			// Define a function to replace "Degraded Performance" text
+			function CorrectEventText () {
+				$(".component-status").each(function() {
+					var text = $(this).text();
+					//Replace "Degraded Performance" with "Event"
+					$(this).text(text.replace('Degraded Performance', 'Event'));
+				});
+			};
+
+			// Call functions
+			CorrectOutageText();
+			CorrectInformationalText();
+			CorrectEventText();
+		};
 	</script>
 </html>
