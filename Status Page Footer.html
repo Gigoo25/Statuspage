@@ -119,6 +119,8 @@
 			CorrectCurrentMaintenancesText();
 			// Call function to replace "Component Status" titles
 			CorrectComponentStatusText();
+			// Call function to replace "Major outage" text in the component container
+			CorrectOutageTextComponentContainer();
 		};
 
 		var x = window.matchMedia("(max-width: 822px)")
@@ -321,6 +323,19 @@
 			CorrectOutageText();
 			CorrectInformationalText();
 			CorrectEventText();
+		};
+
+		// Define a function to replace "Major outage" text in the component container
+		function CorrectOutageTextComponentContainer () {
+			// Add a "outagereplace" class to be able to identify it later
+			$(".outage-count").addClass( "outagereplace" );
+			// Identify the necessary text by text length and replace accordingly.
+			var text = $(".outage-count.outagereplace")
+				.contents()
+				.filter(function() {
+					return this.length ===  38; // Default length of " had a major outage"
+				});
+			text.replaceWith(" had an outage.");
 		};
 	</script>
 </html>
