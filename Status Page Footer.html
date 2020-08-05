@@ -123,6 +123,7 @@
 			CorrectOutageTextComponentContainer();
 		};
 
+		// Set variable for the max width for the layout changes throughout the page
 		var x = window.matchMedia("(max-width: 822px)")
 		applyLayout(x) // Call listener function at run time
 		x.addListener(applyLayout) // Attach listener function on state changes
@@ -157,7 +158,7 @@
 		// Remove 90 day uptime link
 		$('.components-uptime-link').remove();
 
-		// Button Functionality
+		// Custom Buttons Functionality
 		//-----------------------------------
 			// Fade arrow up button after scrolling down some
 		$(window).scroll(function() {
@@ -193,6 +194,8 @@
 		};
 
 		// Correct color coding based on title no mater what the severity is
+			// There is a slight but that will break this function. If the title contains multiple trigger words e.g. "Outage" & "Event" the function will apply it to the last matched trigger word.
+				// This will be fixed hopefully at some point once I can understand a way to do this.
 		function ColorCorrect () {
 			// Correct color for open incidents
 			$(".incident-title:contains('Outage')").closest(".unresolved-incident").removeClass().addClass( "unresolved-incident impact-critical" );
@@ -238,7 +241,7 @@
 
 	  // Correct text for maintenances in the "Open Incidents"
 		function CorrectCurrentMaintenancesText () {
-			// Replace "strong" text within the contents of the incident
+			// Replace "strong" text within the contents of the incident from "Identified" to "In Progress"
 			$(".unresolved-incident.impact-none").find(".updates.font-regular").find(".update").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
@@ -251,16 +254,17 @@
 			$(".incident-name:contains('Maintenance')").parent().addClass( "maintenance" );
 			// If the title contains the previously added "Maintenance" class then continue
 			if ($('.page-title').hasClass("maintenance") !== false) {
-				// Replace "strong" text within the contents of the incident
+				// Replace "strong" text within the contents of the incident from "Resolved" to "Completed"
 				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
 					var text = $(this).text();
 					$(this).text(text.replace('Resolved', 'Completed'));
 				});
+					// Replace "strong" text within the contents of the incident from "Identified" to "In Progress"
 				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
 					var text = $(this).text();
 					$(this).text(text.replace('Identified', 'In Progress'));
 				});
-				// Replace description text after the "strong" text within the description
+					// Replace "strong" text within the contents of the incident from "This incident has been resolved." to "Maintenance has been completed."
 				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
 					var text = $(this).text();
 					$(this).text(text.replace('This incident has been resolved.', 'Maintenance has been completed.'));
@@ -272,11 +276,12 @@
 		function CorrectPastMaintenancesText () {
 			// Add a maintenance class to be able to identify wether its a maintenance or not
 			$(".incident-title.impact-none.font-large").closest(".incident-container").addClass( "maintenance" );
-			// Replace "strong" text within the contents of the incident
+			// Replace "strong" text within the contents of the incident from "Identified" to "In Progress"
 			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
 			});
+			// Replace "strong" text within the contents of the incident from "Resolved" to "Completed"
 			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
 				var text = $(this).text();
 				$(this).text(text.replace('Resolved', 'Completed'));
@@ -319,7 +324,7 @@
 				});
 			};
 
-			// Call functions
+			// Call functions defined above
 			CorrectOutageText();
 			CorrectInformationalText();
 			CorrectEventText();
