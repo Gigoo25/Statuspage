@@ -26,7 +26,7 @@ body {background: #f4f6f9;}
 /* Reduce space below header */
 .layout-content.status .custom-header-container {margin-bottom: 15px;}
 
-/* Apply Anti-Aliasing on images */
+/* Apply Anti-Aliasing on images - mostly for the logo at the top left */
 img {
   -webkit-backface-visibility: hidden;
 }
