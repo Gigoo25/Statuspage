@@ -117,6 +117,12 @@
 			SingleIncidentMaintenancesText();
 			// Call function to correct text for maintenances in the "Open Incidents"
 			CorrectCurrentMaintenancesText();
+			// Call function to correct text for informationals in the "Past Incidents"
+			CorrectPastInformationalsText();
+			// Call function to correct text for informationals in the "Single Incidents"
+			SingleIncidentInformationalsText();
+			// Call function to correct text for informationals in the "Open Incidents"
+			CorrectCurrentInformationalsText();
 			// Call function to replace "Component Status" titles
 			CorrectComponentStatusText();
 			// Call function to replace "Major outage" text in the component container
@@ -246,6 +252,11 @@
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
 			});
+			// Replace "strong" text within the contents of the incident from "Investigating" to "In Progress"
+			$(".unresolved-incident.impact-none").find(".updates.font-regular").find(".update").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Investigating', 'In Progress'));
+			});
 		};
 
 		// Correct text for maintenances in the "Single Incidents"
@@ -264,6 +275,11 @@
 					var text = $(this).text();
 					$(this).text(text.replace('Identified', 'In Progress'));
 				});
+					// Replace "strong" text within the contents of the incident from "Investigating" to "In Progress"
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Investigating', 'In Progress'));
+				});
 					// Replace "strong" text within the contents of the incident from "This incident has been resolved." to "Maintenance has been completed."
 				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-container.span9").find(".update-body.font-regular").each(function() {
 					var text = $(this).text();
@@ -281,6 +297,11 @@
 				var text = $(this).text();
 				$(this).text(text.replace('Identified', 'In Progress'));
 			});
+			// Replace "strong" text within the contents of the incident from "Investigating" to "In Progress"
+			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.investigating").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Investigating', 'In Progress'));
+			});
 			// Replace "strong" text within the contents of the incident from "Resolved" to "Completed"
 			$(".incident-container.maintenance").find(".updates-container").find(".update.font-regular.resolved").find("strong").each(function() {
 				var text = $(this).text();
@@ -293,6 +314,55 @@
 			    return this.length ===  52; // Default length of " - This incident has been resolved."
 			  });
 			text.replaceWith(" - Maintenance has been completed.");
+		};
+
+		// Correct text for informationals in the "Open Incidents"
+		function CorrectCurrentInformationalsText () {
+			// Replace "strong" text within the contents of the incident from "Identified" to "Update"
+			$(".unresolved-incident.impact-major").find(".updates.font-regular").find(".update").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Identified', 'Update'));
+			});
+			// Replace "strong" text within the contents of the incident from "Investigating" to "In Progress"
+			$(".unresolved-incident.impact-major").find(".updates.font-regular").find(".update").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Investigating', 'Notice'));
+			});
+		};
+
+		// Correct text for informationals in the "Single Incidents"
+		function SingleIncidentInformationalsText () {
+			// Add a maintenance class to be able to identify wether its a maintenance or not
+			$(".incident-name:contains('Informational')").parent().addClass( "informational" );
+			// If the title contains the previously added "Maintenance" class then continue
+			if ($('.page-title').hasClass("informational") !== false) {
+					// Replace "strong" text within the contents of the incident from "Identified" to "Update"
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Identified', 'Update'));
+				});
+					// Replace "strong" text within the contents of the incident from "Investigating" to "Notice"
+				$(".container").find(".incident-updates-container").find(".row.update-row").find(".update-title.span3.font-large").each(function() {
+					var text = $(this).text();
+					$(this).text(text.replace('Investigating', 'Notice'));
+				});
+			};
+		};
+
+		// Correct text for informationals in the "Past Incidents"
+		function CorrectPastInformationalsText () {
+			// Add a maintenance class to be able to identify wether its a maintenance or not
+			$(".incident-title.impact-major.font-large").closest(".incident-container").addClass( "informational" );
+			// Replace "strong" text within the contents of the incident from "Identified" to "In Progress"
+			$(".incident-container.informational").find(".updates-container").find(".update.font-regular.identified").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Identified', 'Update'));
+			});
+			// Replace "strong" text within the contents of the incident from "Investigating" to "In Progress"
+			$(".incident-container.informational").find(".updates-container").find(".update.font-regular.investigating").find("strong").each(function() {
+				var text = $(this).text();
+				$(this).text(text.replace('Investigating', 'Notice'));
+			});
 		};
 
 		// Define a function to replace "Component Status" titles
