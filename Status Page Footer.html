@@ -226,6 +226,8 @@
 			$(".update:contains(' - We are continuing to investigate this issue.')").remove();
 			$(".update:contains(' - We are continuing to monitor for any further issues.')").remove();
 			$(".update:contains(' - We are continuing to work on a fix for this issue.')").remove();
+			// Add a way to delete accidental updates.
+			$(".update:contains(' - .')").remove();
 		};
 
 		// Remove generic/accidental updates from "Past incidents"
@@ -236,6 +238,8 @@
 			$(".update.font-regular.update.update:contains('We are continuing to investigate this issue.')").remove();
 			$(".update.font-regular.update.update:contains('We are continuing to monitor for any further issues.')").remove();
 			$(".update.font-regular.update.update:contains('We are continuing to work on a fix for this issue.')").remove();
+			// Add a way to delete accidental updates.
+			$(".update.font-regular.update.update:contains(' - .')").remove();
 		};
 
 		// Close components that are open & change the minus square to a plus
