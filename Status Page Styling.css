@@ -141,7 +141,7 @@ img {
 .scheduled-maintenance {margin-left: 10px;}
 
 /* Spacing for maintenance container spacing */
-.layout-content.status.status-index .scheduled-maintenances-container {margin-top: 27px; margin-bottom: 40px;}
+.layout-content.status.status-index .scheduled-Maintenance-container {margin-top: 27px; margin-bottom: 40px;}
 
 /* Unresolved Incidents Spacing (adjusted by window size) */
 @media screen and (min-width: 822) {.layout-content.status.status-index .unresolved-incidents{margin-bottom: 25px; margin-top: 25px; margin-left: 45px;}}
@@ -164,23 +164,23 @@ img {
 /* Custom Style for "Events_Container" container */
 #Events_Container {display:none;}
 
-/* Custom Style for "Maintenances" title */
-#Maintenances {padding-top: 15px; padding-bottom: -20px; display:none;}
+/* Custom Style for "Maintenance" title */
+#Maintenance {padding-top: 15px; padding-bottom: -20px; display:none;}
 
-/* Add pointer for "Maintenances" title */
-#Maintenances:hover {cursor:pointer;}
+/* Add pointer for "Maintenance" title */
+#Maintenance:hover {cursor:pointer;}
 
-/* Custom Style for "Maintenances_Container" container */
-#Maintenances_Container {display:none;}
+/* Custom Style for "Maintenance_Container" container */
+#Maintenance_Container {display:none;}
 
-/* Custom Style for "Informationals" title */
-#Informationals {padding-top: 15px; padding-bottom: -20px; display:none;}
+/* Custom Style for "Informational" title */
+#Informational {padding-top: 15px; padding-bottom: -20px; display:none;}
 
-/* Add pointer for "Informationals" title */
-#Informationals:hover {cursor:pointer;}
+/* Add pointer for "Informational" title */
+#Informational:hover {cursor:pointer;}
 
-/* Custom Style for "Informationals_Container" container */
-#Informationals_Container {display:none;}
+/* Custom Style for "Informational_Container" container */
+#Informational_Container {display:none;}
 
 /* Hides the components legend */
 .layout-content.status.status-index .components-section .component-statuses-legend {display:none;}
@@ -234,7 +234,7 @@ img {
 /* Past Incidents Maintenance Title Color */
 .layout-content.status.status-index .incidents-list .incident-title.impact-none a {color: #3498DB;}
 /* Scheduled Maintenance Title Color */
-.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a {color: #3498DB;}
+.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenance .incident-title a {color: #3498DB;}
 /* Maintenance History Title Color */
 .layout-content.status-full-history .month .incident-container .impact-none {color: #3498DB;}
 /* Incidents Updates Maintenance Border Color */
@@ -263,11 +263,11 @@ img {
 
 /* Adjust the size of the component status text */
 .layout-content.status.status-index .components-section .component-container.is-group>.component-inner-container .name {font-size: 22px;}
-/* Remove overflow block from "scheduled maintenances" title */
-.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a {max-width: 100%;}
-/* Change date/time position for "scheduled maintenances" title */
+/* Remove overflow block from "scheduled Maintenance" title */
+.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenance .incident-title a {max-width: 100%;}
+/* Change date/time position for "scheduled Maintenance" title */
 .pull-right {float: left;}
-/* Correct date/time display style for "scheduled maintenances" title */
-.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title {display: grid;}
-/* Move date/time slightly up to make it a bit better looking under "scheduled maintenances" title */
-.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title small {top: -2px;}
+/* Correct date/time display style for "scheduled Maintenance" title */
+.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenance .incident-title {display: grid;}
+/* Move date/time slightly up to make it a bit better looking under "scheduled Maintenance" title */
+.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenance .incident-title small {top: -2px;}
