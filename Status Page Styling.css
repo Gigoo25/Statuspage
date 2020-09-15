@@ -139,10 +139,10 @@ img {
 .layout-content.status .incidents-list {margin-left: 10px; margin-top: -25px;}
 
 /* Spacing for maintenance (not title)*/
-.scheduled-maintenances {margin-left: 10px;}
+.scheduled-maintenance {margin-left: 10px;}
 
 /* Spacing for maintenance container spacing */
-.layout-content.status.status-index .scheduled-Maintenance-container {margin-top: 27px; margin-bottom: 40px;}
+.layout-content.status.status-index .scheduled-maintenances-container {margin-top: 27px; margin-bottom: 40px;}
 
 /* Unresolved Incidents Spacing (adjusted by window size) */
 @media screen and (min-width: 822) {.layout-content.status.status-index .unresolved-incidents{margin-bottom: 25px; margin-top: 25px; margin-left: 45px;}}
@@ -235,7 +235,7 @@ img {
 /* Past Incidents Maintenance Title Color */
 .layout-content.status.status-index .incidents-list .incident-title.impact-none a {color: #3498DB;}
 /* Scheduled Maintenance Title Color */
-.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenances .incident-title a {color: #3498DB;}
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a {color: #3498DB;}
 /* Maintenance History Title Color */
 .layout-content.status-full-history .month .incident-container .impact-none {color: #3498DB;}
 /* Incidents Updates Maintenance Border Color */
@@ -265,10 +265,13 @@ img {
 /* Adjust the size of the component status text */
 .layout-content.status.status-index .components-section .component-container.is-group>.component-inner-container .name {font-size: 22px;}
 /* Remove overflow block from "scheduled Maintenance" title */
-.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenances .incident-title a {max-width: 100%;}
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title a {max-width: 100%;}
 /* Change date/time position for "scheduled Maintenance" title */
 .pull-right {float: left;}
 /* Correct date/time display style for "scheduled Maintenance" title */
-.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenances .incident-title {display: grid;}
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title {display: grid;}
 /* Move date/time slightly up to make it a bit better looking under "scheduled Maintenance" title */
-.layout-content.status.status-index .scheduled-Maintenance-container .scheduled-maintenances .incident-title small {top: -2px;}
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title small {top: -2px;}
+
+/* Remove bold weight from scheduled maintenance */
+/* .layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .updates-container .update:last-of-type {font-weight: 1;} */
