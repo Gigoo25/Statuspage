@@ -29,6 +29,7 @@ body {background: #f4f6f9;}
 /* Apply Anti-Aliasing on images - mostly for the logo at the top left */
 img {
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* Button to go to the top customization */
