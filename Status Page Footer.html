@@ -128,7 +128,7 @@
 		// Call function to replace "Major outage" text in the component container
 		CorrectOutageTextComponentContainer();
 		// Call function to correct font weight in scheduled maintenance
-		// CorrectScheduledMaintenanceTextComponentContainer();
+		CorrectScheduledMaintenanceTextComponentContainer();
 	};
 
 	// Set variable for the max width for the layout changes throughout the page
@@ -414,7 +414,7 @@
 		var text = $(".outage-count.outage-replace")
 			.contents()
 			.filter(function () {
-				return this.length === 39; // Default length of " had a major outage"
+				return this.data === "\n          had a major outage.\n        ";
 			});
 		text.replaceWith(" had an outage.");
 	};
@@ -432,17 +432,27 @@
 		var firstsrvimpc = $(".update.correct")
 			.contents()
 			.filter(function () {
-				return this.length === 39; // Default length of "Services Impacted"
+				return this.data === " -\n\n                    Services Impacted";
 			});
 		var srvimpc = $(".update.correct")
 			.contents()
 			.filter(function () {
 				return this.data === "Services Impacted";
 			});
+		var firstexpdwn = $(".update.correct")
+			.contents()
+			.filter(function () {
+				return this.data === " -\n\n                    Expected Downtime";
+			});
 		var expdwn = $(".update.correct")
 			.contents()
 			.filter(function () {
 				return this.data === "Expected Downtime";
+			});
+		var firstpurpact = $(".update.correct")
+			.contents()
+			.filter(function () {
+				return this.data === " -\n\n                    Purpose of Activity";
 			});
 		var purpact = $(".update.correct")
 			.contents()
@@ -452,20 +462,29 @@
 		var firstapprox = $(".update.correct")
 			.contents()
 			.filter(function () {
-				return this.length === 64; // Default length of "Approx # and Type of Subscribers Affected"
+				return this.data === " -\n\n                    Approx # and Type of Subscribers Affected ";
 			});
 		var approx = $(".update.correct")
 			.contents()
 			.filter(function () {
 				return this.data === "Approx # and Type of Subscribers Affected ";
 			});
+		var sched = $(".update.correct")
+			.contents()
+			.filter(function () {
+				return this.textContent === "Scheduled";
+			});
 		// Replace according to variables set above.
 		firstsrvimpc.replaceWith("<strong>Services Impacted:</strong>");
 		srvimpc.replaceWith("<strong>Services Impacted:</strong>");
+		firstexpdwn.replaceWith("<strong>Expected Downtime:</strong>");
 		expdwn.replaceWith("<strong>Expected Downtime:</strong>");
+		firstpurpact.replaceWith("<strong>Purpose of Activity:</strong>");
 		purpact.replaceWith("<strong>Purpose of Activity:</strong>");
 		firstapprox.replaceWith("<strong>Approx # and Type of Subscribers Affected:</strong>");
 		approx.replaceWith("<strong>Approx # and Type of Subscribers Affected:</strong>");
+		// Remove "Scheduled"
+		sched.remove();
 	};
 </script>
 

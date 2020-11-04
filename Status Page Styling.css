@@ -274,4 +274,4 @@ img {
 .layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .incident-title small {top: -2px;}
 
 /* Remove bold weight from scheduled maintenance */
-/* .layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .updates-container .update:last-of-type {font-weight: 1;} */
+.layout-content.status.status-index .scheduled-maintenances-container .scheduled-maintenance .updates-container .update:last-of-type {font-weight: 1;}
